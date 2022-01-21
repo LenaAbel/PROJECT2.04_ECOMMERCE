@@ -5,6 +5,6 @@ Groupe numéro : 15
 * étudiant 3 : PICOT Nicolas
 * étudiant 4 : TOUILLON Samuel
 
-URL du projet github : https://github.com/SAEADPT/SAEDPT
+URL du projet github : https://github.com/SAEADPT/SAEDPT.git
 
 URL du site pythonanywhere : https://www.pythonanywhere.com/user/SAE204ADPT/
