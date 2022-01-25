@@ -6,11 +6,10 @@ def get_db():
     db = getattr(g, '_database', None)
     if db is None:
         db = g._database = pymysql.connect(
-            host="localhost",
-            # host="serveurmysql",
-            user="votreLogin",
-            password="votreMotDePasse",
-            database="BDD_flask",
+            host="serveurmysql",
+            user="label2",
+            password="0310",
+            database="BDD_label2",
             charset='utf8mb4',
             cursorclass=pymysql.cursors.DictCursor
         )
