@@ -6,16 +6,16 @@ from flask import Blueprint
 
 from controllers.auth_security import *
 
-from controllers.client_article import *
+from controllers.client_chaussure import *
 from controllers.client_panier import *
 from controllers.client_commande import *
 from controllers.client_commentaire import *
 
-from controllers.admin_article import *
+from controllers.admin_chaussure import *
 from controllers.admin_commande import *
 from controllers.admin_panier import *
-from controllers.admin_type_article import *
-from controllers.admin_dataviz_article import *
+from controllers.admin_type_chaussure import *
+from controllers.admin_dataviz_chaussure import *
 
 app = Flask(__name__)
 app.secret_key = 'une cle(token) : grain de sel(any random string)'
@@ -31,6 +31,23 @@ def close_connection(exception):
 @app.route('/')
 def show_accueil():
     return render_template('auth/layout.html')
+
+# METHODES TYPES CHAUSSURES #
+
+# AUTH #
+@app.route('/auth/type_chaussre/show_type')
+def show_type_chaussure():
+    return render_template('auth/layout.html')
+
+
+
+
+# ADMIN #
+
+# CLIENT #
+
+
+
 
 ##################
 # Authentification
@@ -69,4 +86,3 @@ app.register_blueprint(admin_dataviz_article)
 
 if __name__ == '__main__':
     app.run()
-
