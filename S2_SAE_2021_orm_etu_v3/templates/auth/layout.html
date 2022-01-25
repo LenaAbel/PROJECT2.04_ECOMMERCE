@@ -14,13 +14,10 @@
 
 {% include('auth/_nav.html') %}
 
-
-<div class="container">
     {% block body %}
-        <h2 style="color:blue">auth/layout.html</h2>
-        Site de vente projet SAE S2 BDD
+        <h2 style="color: #0b5ed7 ; font-weight: bold ; text-align: left; padding: 1%">Bienvenue sur notre site de vente projet SAE S2 BDD!</h2>
     {% endblock %}
-</div>
+
 
 {% block javascripts %}
     <script src="{{ url_for('static', filename='assets/js/jquery-3.5.1.slim.min.js') }}"></script>
