@@ -29,62 +29,106 @@ def close_connection(exception):
 
 @app.route('/')
 def show_accueil():
+    return render_template('auth/layout.html')
 
-    return render_template('layout.html')
+###################ADMIN CHAUSSURE###########################
 
-@app.route('/client/show')
-def show_client():
-    sql = "SELECT * FROM CLIENT"
-    mycursor.execute(sql)
-    clients = mycursor.fetchall()
-    #print(types_articles)
-    return render_template('client/show_clients.html', client=clients)
+@app.route('/admin')
+def show_accueil_admin():
+    return render_template('admin/layout_admin.html')
 
-@app.route('/client/add', methods=['GET'])
+@app.route('/admin/chaussure/add_chaussure', methods=['GET'])
+def add_article():
+    k
+@app.route('/admin/chaussure/add_chaussure', methods=['POST'])
+def valid_add_chaussure():
+    k
+@app.route('/admin/chaussure/edit_chaussure', methods=['GET'])
+def edit_article():
+    k
+
+@app.route('/admin/chaussure/edit_chaussure', methods=['POST'])
+def valid_edit_chaussure():
+    k
+    
+@app.route('/admin/chaussure/show_chaussure')
+def show_chaussure():
+    k
+    
+########ADMIN DATA VIZ#######
+    
+@app.route('/dataviz/etat_chaussure_vente')
+def etat_chaussure_vente():
+    k
+@app.route('/dataviz/etat_type_chaussure_stock')
+def etat_type_chaussure_stock():
+    k
+    
+#####ADMIN TYPE CHAUSSURE######    
+
+@app.route('/type_chaussure/add_type_chaussure', methods=['GET'])
 def add_type_chaussure():
-    return render_template('client/add_client.html')
-
-@app.route('/client/add', methods=['POST'])
+    k
+@app.route('/type_chaussure/add_type_chaussure', methods=['POST'])
 def valid_add_type_chaussure():
-    nomClient = request.form.get('nomClient', '')
-    prenomClient = request.form.get('prenomClient', '')
-    print(u'type ajouté , libellé :', nomClient)
-    sql = "INSERT INTO CLIENT VALUES (NULL , %s, %s, 1)"
-    mycursor.execute(sql, (nomClient, prenomClient))
-    mydb.commit()
-    return redirect(url_for('show_client'))
-
-@app.route('/client/delete', methods=['GET'])
+    k
+@app.route('/type_chaussure/delete_type_chaussure')
 def delete_type_chaussure():
-    id = request.args.get('id', '')
-    print ("Un type d'article supprimé, id :",id)
-    sql = "DELETE FROM CLIENT WHERE numClient=%s"
-    mycursor.execute("SET FOREIGN_KEY_CHECKS=0")
-    mycursor.execute(sql, (id))
-    mydb.commit()
-    return redirect(url_for('show_client'))
-
-@app.route('/client/edit/<int:id>', methods=['GET'])
-def edit_type_chaussure(id):
-
-    sql = "SELECT numClient, nomClient, prenomClient, numParrain FROM CLIENT WHERE numClient=%s"
-    mycursor.execute(sql, (id))
-    client = mycursor.fetchone()
-    print(client)
-    mydb.commit()
-    return render_template('client/edit_client.html', client=client)
-
-@app.route('/client/edit', methods=['POST'])
+    k
+@app.route('/type_chaussure/edit_type_chaussure', methods=['GET'])
+def edit_type_chaussure():
+    k
+@app.route('/type_article/edit_type_chaussure', methods=['POST'])
 def valid_edit_type_chaussure():
-    nomClient = request.form.get('nomClient', '')
-    prenomClient = request.form.get('prenomClient', '')
-    numClient = request.form.get('numClient', '')
-    print("un type d'article supprimé, id :", id)
-    sql = "UPDATE CLIENT SET nomClient=%s, prenomClient=%s WHERE numClient=%s"
-    mycursor.execute(sql, (nomClient, prenomClient, numClient))
-    mydb.commit()
-    print(nomClient, prenomClient, numClient)
-    return redirect(url_for('show_client'))
+    k
+@app.route('/type_chaussure/show_type_chaussure')
+def show_type_chaussure():
+    k
+#######ADMIN COMMANDES#######
+@app.route('/commandes/show')
+def show_commandes():    
+    k
 
+    
+    
+#############AUTH##############################
+    
+@app.route('/auth/_nav')
+def _nav():
+    k
+@app.route('/auth/layout')
+def layout():
+    k
+@app.route('/auth/login')
+def login():
+    k
+@app.route('/auth/signup')
+def signup():
+    k
+    
+    
+##################CLIENT#########################
+@app.route('/client')
+def show_accueil():
+    return render_template('auth/layout.html')
+
+#########BOUTIQUE###########
+@app.route('/client/boutique/_filtre')
+def _filtre():
+    k
+@app.route('/client/boutique/chaussure_details')
+def chaussure_details():
+    k
+@app.route('/client/boutique/panier_chaussure')
+def panier_chaussure():
+    k
+    
+#########COMMANDES###########
+@app.route('/client/commandes/show')
+def show_commandes_client():
+    k
+    
+
+    
 if __name__ == '__main__':
     app.run()
