@@ -1,88 +1,61 @@
-#! /usr/bin/python
-# -*- coding:utf-8 -*-
-
-from flask import Flask, request, render_template, redirect, url_for, abort, flash, session, g
-from flask import Blueprint
-
-from controllers.auth_security import *
-
-from controllers.client_chaussure import *
-from controllers.client_panier import *
-from controllers.client_commande import *
-from controllers.client_commentaire import *
-
-from controllers.admin_chaussure import *
-from controllers.admin_commande import *
-from controllers.admin_panier import *
-from controllers.admin_type_chaussure import *
-from controllers.admin_dataviz_chaussure import *
-
-app = Flask(__name__)
-app.secret_key = 'une cle(token) : grain de sel(any random string)'
-
-
-@app.teardown_appcontext
-def close_connection(exception):
-    db = getattr(g, '_database', None)
-    if db is not None:
-        db.close()
-
-
 @app.route('/')
 def show_accueil():
-    return render_template('auth/layout.html')
 
-# METHODES TYPES CHAUSSURES #
+    return render_template('layout.html')
 
-# AUTH #
-@app.route('/auth/type_chaussre/show_type')
-def show_type_chaussure():
-    return render_template('auth/layout.html')
+@app.route('/client/show')
+def show_client():
+    sql = "SELECT * FROM CLIENT"
+    mycursor.execute(sql)
+    clients = mycursor.fetchall()
+    #print(types_articles)
+    return render_template('client/show_clients.html', client=clients)
 
+@app.route('/client/add', methods=['GET'])
+def add_type_article():
+    return render_template('client/add_client.html')
 
+@app.route('/client/add', methods=['POST'])
+def valid_add_type_article():
+    nomClient = request.form.get('nomClient', '')
+    prenomClient = request.form.get('prenomClient', '')
+    print(u'type ajouté , libellé :', nomClient)
+    sql = "INSERT INTO CLIENT VALUES (NULL , %s, %s, 1)"
+    mycursor.execute(sql, (nomClient, prenomClient))
+    mydb.commit()
+    return redirect(url_for('show_client'))
 
+@app.route('/client/delete', methods=['GET'])
+def delete_type_article():
+    id = request.args.get('id', '')
+    print ("un type d'article supprimé, id :",id)
+    sql = "DELETE FROM CLIENT WHERE numClient=%s"
+    mycursor.execute("SET FOREIGN_KEY_CHECKS=0")
+    mycursor.execute(sql, (id))
+    mydb.commit()
+    return redirect(url_for('show_client'))
 
-# ADMIN #
+@app.route('/client/edit/<int:id>', methods=['GET'])
+def edit_type_article(id):
 
-# CLIENT #
+    sql = "SELECT numClient, nomClient, prenomClient, numParrain FROM CLIENT WHERE numClient=%s"
+    mycursor.execute(sql, (id))
+    client = mycursor.fetchone()
+    print(client)
+    mydb.commit()
+    return render_template('client/edit_client.html', client=client)
 
-
-
-
-##################
-# Authentification
-##################
-
-# Middleware de sécurité
-
-@app.before_request
-def before_request():
-     if request.path.startswith('/admin') or request.path.startswith('/client'):
-        if 'role' not in session:
-            return redirect('/login')
-            #return redirect(url_for('auth_login'))
-        else:
-            if (request.path.startswith('/client') and session['role'] != 'ROLE_client') or (request.path.startswith('/admin') and session['role'] != 'ROLE_admin'):
-                print('pb de route : ', session['role'], request.path.title(), ' => deconnexion')
-                session.pop('username', None)
-                session.pop('role', None)
-                return redirect('/login')
-                #return redirect(url_for('auth_login'))
-
-
-app.register_blueprint(auth_security)
-
-app.register_blueprint(client_article)
-app.register_blueprint(client_commande)
-app.register_blueprint(client_commentaire)
-app.register_blueprint(client_panier)
-
-app.register_blueprint(admin_article)
-app.register_blueprint(admin_commande)
-app.register_blueprint(admin_panier)
-app.register_blueprint(admin_type_article)
-app.register_blueprint(admin_dataviz_article)
-
+@app.route('/client/edit', methods=['POST'])
+def valid_edit_type_article():
+    nomClient = request.form.get('nomClient', '')
+    prenomClient = request.form.get('prenomClient', '')
+    numClient = request.form.get('numClient', '')
+    print("un type d'article supprimé, id :", id)
+    sql = "UPDATE CLIENT SET nomClient=%s, prenomClient=%s WHERE numClient=%s"
+    mycursor.execute(sql, (nomClient, prenomClient, numClient))
+    mydb.commit()
+    print(nomClient, prenomClient, numClient)
+    return redirect(url_for('show_client'))
 
 if __name__ == '__main__':
     app.run()
