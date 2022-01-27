@@ -1,3 +1,32 @@
+#! /usr/bin/python
+# -*- coding:utf-8 -*-
+
+from flask import Flask, request, render_template, redirect, url_for, abort, flash, session, g
+from flask import Blueprint
+
+from controllers.auth_security import *
+
+from controllers.client_article import *
+from controllers.client_panier import *
+from controllers.client_commande import *
+from controllers.client_commentaire import *
+
+from controllers.admin_article import *
+from controllers.admin_commande import *
+from controllers.admin_panier import *
+from controllers.admin_type_article import *
+from controllers.admin_dataviz_article import *
+
+app = Flask(__name__)
+app.secret_key = 'une cle(token) : grain de sel(any random string)'
+
+
+@app.teardown_appcontext
+def close_connection(exception):
+    db = getattr(g, '_database', None)
+    if db is not None:
+        db.close()
+
 @app.route('/')
 def show_accueil():
 
@@ -12,11 +41,11 @@ def show_client():
     return render_template('client/show_clients.html', client=clients)
 
 @app.route('/client/add', methods=['GET'])
-def add_type_article():
+def add_type_chaussure():
     return render_template('client/add_client.html')
 
 @app.route('/client/add', methods=['POST'])
-def valid_add_type_article():
+def valid_add_type_chaussure():
     nomClient = request.form.get('nomClient', '')
     prenomClient = request.form.get('prenomClient', '')
     print(u'type ajouté , libellé :', nomClient)
@@ -26,9 +55,9 @@ def valid_add_type_article():
     return redirect(url_for('show_client'))
 
 @app.route('/client/delete', methods=['GET'])
-def delete_type_article():
+def delete_type_chaussure():
     id = request.args.get('id', '')
-    print ("un type d'article supprimé, id :",id)
+    print ("Un type d'article supprimé, id :",id)
     sql = "DELETE FROM CLIENT WHERE numClient=%s"
     mycursor.execute("SET FOREIGN_KEY_CHECKS=0")
     mycursor.execute(sql, (id))
@@ -36,7 +65,7 @@ def delete_type_article():
     return redirect(url_for('show_client'))
 
 @app.route('/client/edit/<int:id>', methods=['GET'])
-def edit_type_article(id):
+def edit_type_chaussure(id):
 
     sql = "SELECT numClient, nomClient, prenomClient, numParrain FROM CLIENT WHERE numClient=%s"
     mycursor.execute(sql, (id))
@@ -46,7 +75,7 @@ def edit_type_article(id):
     return render_template('client/edit_client.html', client=client)
 
 @app.route('/client/edit', methods=['POST'])
-def valid_edit_type_article():
+def valid_edit_type_chaussure():
     nomClient = request.form.get('nomClient', '')
     prenomClient = request.form.get('prenomClient', '')
     numClient = request.form.get('numClient', '')
