@@ -88,14 +88,9 @@ def show_type_chaussure():
 @app.route('/commandes/show')
 def show_commandes():    
     k
-
-    
     
 #############AUTH##############################
-    
-@app.route('/auth/_nav')
-def _nav():
-    k
+
 @app.route('/auth/layout')
 def layout():
     k
@@ -105,7 +100,6 @@ def login():
 @app.route('/auth/signup')
 def signup():
     k
-    
     
 ##################CLIENT#########################
 @app.route('/client')
@@ -127,8 +121,6 @@ def panier_chaussure():
 @app.route('/client/commandes/show')
 def show_commandes_client():
     k
-    
-
     
 if __name__ == '__main__':
     app.run()
