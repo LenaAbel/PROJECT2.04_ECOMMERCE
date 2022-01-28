@@ -3,34 +3,34 @@
 <div class="container">
     <div class="row">
          <h2 class="card-title">
-             <span style="color: #0b2e13">{{ article.nom }}</span> &nbsp;{{ article.prix }} €
+             <span style="color: #0b2e13">{{ chaussure.nom }}</span> &nbsp;{{ chaussure.prix }} €
          </h2>
 
         <div class="card-body">
-        {%  if article.image is not none %}
-            <img class="card-img-top rounded mx-auto d-block"  style="width:100px;height:100px"  src="{{ url_for('static', filename = 'images/' + article['image']) }}"  alt="image  de {{ article.nom }}" >
-        {% else %} <img class="card-img-top rounded mx-auto d-block"   style="width:100px;height:100px"   src="{{ url_for('static', filename='images/no_photo.jpeg')}}"  alt="image  de {{ article.nom }}" >
+        {%  if chaussure.image is not none %}
+            <img class="card-img-top rounded mx-auto d-block"  style="width:100px;height:100px"  src="{{ url_for('static', filename = 'images/' + chaussure['image']) }}"  alt="image  de {{ chaussure.nom }}" >
+        {% else %} <img class="card-img-top rounded mx-auto d-block"   style="width:100px;height:100px"   src="{{ url_for('static', filename='images/no_photo.jpeg')}}"  alt="image  de {{ chaussure.nom }}" >
         {% endif %}
 
         </div>
     </div>
 
     <div class="row" style="background-color: #ba8b00">
-        {% if commandes_articles | length > 0 %}
+        {% if commandes_chaussures | length > 0 %}
             <div class="col-12">
-                 Vous avez commandé <strong>{{ commandes_articles | length }} </strong>fois  ce produit
+                 Vous avez commandé <strong>{{ commandes_chaussures | length }} </strong>fois  ce produit
             </div>
             <form  action="/client/comment/add"  method="post">
                 <div class="col">
-                  <label for="inputAvis" class="form-label">Mettez un commentaire sur cet article : </label>
+                  <label for="inputAvis" class="form-label">Mettez un commentaire sur cet chaussure : </label>
                      <textarea name="commentaire" class="form-control" aria-label="Donnez votre avis" id="inputAvis"  placeholder="Donnez votre avis"></textarea>
                 </div>
                 <div class="col-12">
-                    <label for="inputNote" class="form-label">Donnez une note à cet article </label>
+                    <label for="inputNote" class="form-label">Donnez une note à cet chaussure </label>
                     <input type="number" name="note" id="inputNote" step="0.1" min="0" max="5" class="form-control" style="width: 8rem !important;" value="" >
                 </div>
                 <input type="hidden" name="idUser" value="{{ session['user_id'] }}">
-                <input type="hidden" name="idArticle" value="{{ article.id }}">
+                <input type="hidden" name="idchaussure" value="{{ chaussure.id }}">
                 <form  action="/client/comment/add" style="display: inline-block;"  method="post" >
                         <button class="btn btn-primary" > Ajouter un avis </button>
                 </form>
@@ -68,7 +68,7 @@
                         <td>
                             {% if commentaire.user_id == session['user_id'] %}
                                   <form  action="/client/comment/delete"  style="display: inline-block;"  method="post" >
-                                      <input type="hidden" name="idArticle" value="{{ commentaire.article_id }}">
+                                      <input type="hidden" name="idchaussure" value="{{ commentaire.chaussure_id }}">
                                       <input type="hidden" name="idUser" value="{{ commentaire.user_id }}">
                                       <input type="hidden" name="idAvis" value="{{ commentaire.id }}">
                                       <button class="btn btn-primary" > supprimer </button>
@@ -82,7 +82,7 @@
             {% endif %}
             </tbody>
         </table>
-        <a class="btn btn-outline-primary btn-lg" href="/client/article/show" >Retour vers la page d'accueil</a>
+        <a class="btn btn-outline-primary btn-lg" href="/client/chaussure/show" >Retour vers la page d'accueil</a>
     </div>
 </div>
 

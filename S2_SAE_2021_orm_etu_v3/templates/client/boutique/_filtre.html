@@ -5,7 +5,7 @@
     </div>
    {% if itemsFiltre is defined %}
     <div class="form-group">
-        <h4>Types articles</h4>
+        <h4>Types chaussures</h4>
         {% for itemFiltre in itemsFiltre %}
         <input type="checkbox" name="filter_types" value="{{ itemFiltre.id }}"
                {% set idItem = itemFiltre.id | string %}
