@@ -123,7 +123,7 @@ INSERT INTO TYPE_CHAUSSURE VALUES (NULL, 'Baskets'),
                                   (NULL, 'Claquettes'),
                                   (NULL, 'Bottes'),
                                   (NULL, 'Talons'),
-                                  (NULL, 'Chaussons')
+                                  (NULL, 'Chaussons'),
                                   (NULL, 'Ballerines');
 
 INSERT INTO COULEUR VALUES (NULL, 'Beige'),
@@ -139,16 +139,16 @@ INSERT INTO COULEUR VALUES (NULL, 'Beige'),
                            (NULL, 'Rose'),
                            (NULL, 'Orange');
 
-INSERT INTO COMMANDE VALUES (NULL, "2019-12-20", 2, 3),
-                            (NULL, "2021-02-03", 4, 3),
-                            (NULL, "2021-09-29", 9, 2),
-                            (NULL, "2021-12-07", 7, 1),
-                            (NULL, "2019-05-19", 8, 3),
-                            (NULL, "2022-01-25", 6, 1),
-                            (NULL, "2021-11-11", 5, 2),
-                            (NULL, "2020-12-25", 7, 3),
-                            (NULL, "2020-07-12", 5, 2),
-                            (NULL, "2020-01-05", 1, 3);
+INSERT INTO COMMANDE VALUES (NULL, '2019-12-20', 2, 3),
+                            (NULL, '2021-02-03', 4, 3),
+                            (NULL, '2021-09-29', 9, 2),
+                            (NULL, '2021-12-07', 7, 1),
+                            (NULL, '2019-05-19', 8, 3),
+                            (NULL, '2022-01-25', 6, 1),
+                            (NULL, '2021-11-11', 5, 2),
+                            (NULL, '2020-12-25', 7, 3),
+                            (NULL, '2020-07-12', 5, 2),
+                            (NULL, '2020-01-05', 1, 3);
 
 INSERT INTO POINTURE VALUES (NULL, 36.0),
                             (NULL, 36.5),
@@ -181,7 +181,7 @@ INSERT INTO CHAUSSURE VALUES (NULL, 'Oui', 'NIKE', 'Point C', 1),
                              (NULL, 'Corail', 'Cannonne', 'Drof', 4),
                              (NULL, 'Alpha', 'Letin', 'Nozama', 6),
                              (NULL, 'Zilla', 'Nokin', 'Eaki', 3),
-                             (NULL, 'Ethernal', 'Ssegue', 'Odentinne', 5)
+                             (NULL, 'Ethernal', 'Ssegue', 'Odentinne', 5),
                              (NULL, 'Octo', 'NIKE', 'Point C', 1),
                              (NULL, 'Virtuos', 'Balenciago', 'Botru-Chausse', 2),
                              (NULL, 'Elite', 'Cannonne', 'Drof', 4),
@@ -192,7 +192,7 @@ INSERT INTO CHAUSSURE VALUES (NULL, 'Oui', 'NIKE', 'Point C', 1),
 INSERT INTO LIGNE_COMMANDE VALUES (1, 1, 49.99, 1),
                                   (2, 2, 79.99, 2),
                                   (3, 3, 69.99, 1),
-                                  (4 10, 35.99, 2),
+                                  (4, 10, 35.99, 2),
                                   (5, 11, 99.99, 1),
                                   (6, 4, 49.99, 1),
                                   (7, 9, 59.99, 1),
@@ -228,16 +228,16 @@ INSERT INTO EST_DE_COULEUR VALUES (1, 11),
                                   (11, 2),
                                   (12, 10);
 
-INSERT INTO PANIER VALUES (NULL, "2019-12-19", 49.99, 1, 1, 1), 
-                          (NULL, "2020-01-05", 79.99, 2, 2, 2),
-                          (NULL, "2020-01-05", 69.99, 1, 3, 4),
-                          (NULL, "2020-01-05", 35.99, 2, 10, 6),
-                          (NULL, "2020-01-05", 99.99, 1, 11, 7),
-                          (NULL, "2020-01-05", 49.99, 1, 4, 3),
-                          (NULL, "2020-01-05", 59.99, 1, 9, 9),
-                          (NULL, "2020-01-05", 39.99, 2, 5, 5),
-                          (NULL, "2020-01-05", 29.99, 2, 8, 7),
-                          (NULL, "2020-01-05", 24.99, 1, 6, 8);
+INSERT INTO PANIER VALUES (NULL, '2019-12-19', 49.99, 1, 1, 1),
+                          (NULL, '2020-01-05', 79.99, 2, 2, 2),
+                          (NULL, '2020-01-05', 69.99, 1, 3, 4),
+                          (NULL, '2020-01-05', 35.99, 2, 10, 6),
+                          (NULL, '2020-01-05', 99.99, 1, 11, 7),
+                          (NULL, '2020-01-05', 49.99, 1, 4, 3),
+                          (NULL, '2020-01-05', 59.99, 1, 9, 9),
+                          (NULL, '2020-01-05', 39.99, 2, 5, 5),
+                          (NULL, '2020-01-05', 29.99, 2, 8, 7),
+                          (NULL, '2020-01-05', 24.99, 1, 6, 8);
 
 SELECT * FROM UTILISATEUR;
 SELECT * FROM ETAT;
