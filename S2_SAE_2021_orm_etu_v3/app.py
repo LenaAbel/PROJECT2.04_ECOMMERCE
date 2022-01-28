@@ -6,24 +6,24 @@ from flask import Blueprint
 
 from controllers.auth_security import *
 
-from controllers.client_article import *
+from controllers.client_chaussure import *
 from controllers.client_panier import *
 from controllers.client_commande import *
 from controllers.client_commentaire import *
 
-from controllers.admin_article import *
+from controllers.admin_chaussure import *
 from controllers.admin_commande import *
 from controllers.admin_panier import *
-from controllers.admin_type_article import *
-from controllers.admin_dataviz_article import *
+from controllers.admin_type_chaussure import *
+from controllers.admin_dataviz_chaussure import *
 
 import pymysql.cursors
 
 mydb = pymysql.connect(    #pymysql.connect remplace mysql.connector
   host="serveurmysql",   #serveurmysql
-  user="stoillon",
-  password="3006",
-  database="BDD_stoillon",
+  user="label2",
+  password="0310",
+  database="BDD_label2",
   charset='utf8mb4',                      # 2 attributs à ajouter
   cursorclass=pymysql.cursors.DictCursor  # 2 attributs à ajouter
 )
@@ -50,13 +50,13 @@ def show_accueil_admin():
     return render_template('admin/layout_admin.html')
 
 @app.route('/admin/chaussure/add_chaussure', methods=['GET'])
-def add_article():
+def add_chaussure():
     k
 @app.route('/admin/chaussure/add_chaussure', methods=['POST'])
 def valid_add_chaussure():
     k
 @app.route('/admin/chaussure/edit_chaussure', methods=['GET'])
-def edit_article():
+def edit_chaussure():
     k
 
 @app.route('/admin/chaussure/edit_chaussure', methods=['POST'])
@@ -90,7 +90,7 @@ def delete_type_chaussure():
 @app.route('/type_chaussure/edit_type_chaussure', methods=['GET'])
 def edit_type_chaussure():
     k
-@app.route('/type_article/edit_type_chaussure', methods=['POST'])
+@app.route('/type_chaussure/edit_type_chaussure', methods=['POST'])
 def valid_edit_type_chaussure():
     k
 @app.route('/type_chaussure/show_type_chaussure')
