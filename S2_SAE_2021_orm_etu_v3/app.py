@@ -17,6 +17,18 @@ from controllers.admin_panier import *
 from controllers.admin_type_article import *
 from controllers.admin_dataviz_article import *
 
+import pymysql.cursors
+
+mydb = pymysql.connect(    #pymysql.connect remplace mysql.connector
+  host="serveurmysql",   #serveurmysql
+  user="stoillon",
+  password="3006",
+  database="BDD_stoillon",
+  charset='utf8mb4',                      # 2 attributs à ajouter
+  cursorclass=pymysql.cursors.DictCursor  # 2 attributs à ajouter
+)
+mycursor = mydb.cursor()
+
 app = Flask(__name__)
 app.secret_key = 'une cle(token) : grain de sel(any random string)'
 
@@ -59,7 +71,7 @@ def show_chaussure():
     
 @app.route('/dataviz/etat_chaussure_vente')
 def etat_chaussure_vente():
-    k
+    return render_template('/admin/dataviz/etat_chaussure_vente.html')
 @app.route('/dataviz/etat_type_chaussure_stock')
 def etat_type_chaussure_stock():
     k
