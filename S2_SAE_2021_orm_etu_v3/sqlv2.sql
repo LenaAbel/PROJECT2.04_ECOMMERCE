@@ -15,8 +15,8 @@ DROP TABLE IF EXISTS POINTURE;
 CREATE TABLE IF NOT EXISTS UTILISATEUR(
    id_utilisateur INT NOT NULL AUTO_INCREMENT,
    username VARCHAR(50),
-   mot_de_passe VARCHAR(100),
-   role_utilisateur VARCHAR(50),
+   password VARCHAR(100),
+   role VARCHAR(50),
    est_actif INT,
    pseudo VARCHAR(50),
    email VARCHAR(50),
