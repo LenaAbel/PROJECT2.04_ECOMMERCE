@@ -3,7 +3,7 @@ Groupe numéro : 15
 * étudiant référent : ABEL Léna
 * étudiant 2 : DUBOL Lucas
 * étudiant 3 : PICOT Nicolas
-* étudiant 4 : TOUILLON Samuel
+* étudiant 4 : TOILLON Samuel
 
 URL du projet github : https://github.com/SAEADPT/SAEDPT.git
 
