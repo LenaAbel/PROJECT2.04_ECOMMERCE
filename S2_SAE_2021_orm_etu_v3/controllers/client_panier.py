@@ -13,14 +13,14 @@ client_panier = Blueprint('client_panier', __name__,
 def client_panier_add():
     mycursor = get_db().cursor()
 
-    return redirect('/client/article/show')
+    return redirect('/client/chaussure/show')
     #return redirect(url_for('client_index'))
 
 @client_panier.route('/client/panier/delete', methods=['POST'])
 def client_panier_delete():
     mycursor = get_db().cursor()
 
-    return redirect('/client/article/show')
+    return redirect('/client/chaussure/show')
     #return redirect(url_for('client_index'))
 
 
@@ -28,7 +28,7 @@ def client_panier_delete():
 def client_panier_vider():
     mycursor = get_db().cursor()
 
-    return redirect('/client/article/show')
+    return redirect('/client/chaussure/show')
     #return redirect(url_for('client_index'))
 
 
@@ -36,7 +36,7 @@ def client_panier_vider():
 def client_panier_delete_line():
     mycursor = get_db().cursor()
 
-    return redirect('/client/article/show')
+    return redirect('/client/chaussure/show')
     #return redirect(url_for('client_index'))
 
 
@@ -48,7 +48,7 @@ def client_panier_filtre():
     filter_prix_max = request.form.get('filter_prix_max', None)
     filter_types = request.form.getlist('filter_types', None)
 
-    return redirect('/client/article/show')
+    return redirect('/client/chaussure/show')
     #return redirect(url_for('client_index'))
 
 
@@ -59,5 +59,5 @@ def client_panier_filtre_suppr():
     session.pop('filter_prix_max', None)
     session.pop('filter_types', None)
     print("suppr filtre")
-    return redirect('/client/article/show')
+    return redirect('/client/chaussure/show')
     #return redirect(url_for('client_index'))
