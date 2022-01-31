@@ -2,26 +2,24 @@
 # -*- coding:utf-8 -*-
 from flask import Blueprint
 from flask import Flask, request, render_template, redirect, url_for, abort, flash, session, g
-from datetime import datetime
+
 from connexion_db import get_db
 
-client_commande = Blueprint('client_commande', __name__,
+client_commentaire = Blueprint('client_commentaire', __name__,
                         template_folder='templates')
 
-
-@client_commande.route('/client/commande/add', methods=['POST'])
-def client_commande_add():
+@client_commentaire.route('/client/comment/add', methods=['POST'])
+def client_comment_add():
     mycursor = get_db().cursor()
-    flash(u'Commande ajoutée')
-    return redirect('/client/article/show')
-    #return redirect(url_for('client_index'))
+    chaussure_id = request.form.get('idchaussure', None)
 
+    return redirect('/client/chaussure/details/'+chaussure_id)
+    #return redirect(url_for('client_chaussure_details', id=int(chaussure_id)))
 
-
-@client_commande.route('/client/commande/show', methods=['get','post'])
-def client_commande_show():
+@client_commentaire.route('/client/comment/delete', methods=['POST'])
+def client_comment_detete():
     mycursor = get_db().cursor()
-    commandes = None
-    articles_commande = None
-    return render_template('client/commandes/show.html', commandes=commandes, articles_commande=articles_commande)
+    chaussure_id = request.form.get('idchaussure', None)
 
+    return redirect('/client/chaussure/details/'+chaussure_id)
+    #return redirect(url_for('client_chaussure_details', id=int(chaussure_id)))
