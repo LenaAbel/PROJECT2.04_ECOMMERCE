@@ -5,66 +5,66 @@ from flask import Flask, request, render_template, redirect, url_for, abort, fla
 
 from connexion_db import get_db
 
-admin_article = Blueprint('admin_article', __name__,
+admin_chaussure = Blueprint('admin_chaussure', __name__,
                         template_folder='templates')
 
-@admin_article.route('/admin/article/show')
-def show_article():
+@admin_chaussure.route('/admin/chaussure/show')
+def show_chaussure():
     mycursor = get_db().cursor()
-    articles = None
-    # print(articles)
-    return render_template('admin/article/show_article.html', articles=articles)
+    chaussures = None
+    # print(chaussures)
+    return render_template('admin/chaussure/show_chaussure.html', chaussures=chaussures)
 
-@admin_article.route('/admin/article/add', methods=['GET'])
-def add_article():
+@admin_chaussure.route('/admin/chaussure/add', methods=['GET'])
+def add_chaussure():
     mycursor = get_db().cursor()
-    types_articles = None
-    return render_template('admin/article/add_article.html', types_articles=types_articles)
+    types_chaussures = None
+    return render_template('admin/chaussure/add_chaussure.html', types_chaussures=types_chaussures)
 
-@admin_article.route('/admin/article/add', methods=['POST'])
-def valid_add_article():
+@admin_chaussure.route('/admin/chaussure/add', methods=['POST'])
+def valid_add_chaussure():
     nom = request.form.get('nom', '')
-    type_article_id = request.form.get('type_article_id', '')
-   # type_article_id = int(type_article_id)
+    type_chaussure_id = request.form.get('type_chaussure_id', '')
+   # type_chaussure_id = int(type_chaussure_id)
     prix = request.form.get('prix', '')
     stock = request.form.get('stock', '')
     description = request.form.get('description', '')
     image = request.form.get('image', '')
 
 
-    print(u'article ajouté , nom: ', nom, ' - type_article:', type_article_id, ' - prix:', prix, ' - stock:', stock, ' - description:', description, ' - image:', image)
-    message = u'article ajouté , nom:'+nom + '- type_article:' + type_article_id + ' - prix:' + prix + ' - stock:'+  stock + ' - description:' + description + ' - image:' + image
+    print(u'chaussure ajouté , nom: ', nom, ' - type_chaussure:', type_chaussure_id, ' - prix:', prix, ' - stock:', stock, ' - description:', description, ' - image:', image)
+    message = u'chaussure ajouté , nom:'+nom + '- type_chaussure:' + type_chaussure_id + ' - prix:' + prix + ' - stock:'+  stock + ' - description:' + description + ' - image:' + image
     flash(message)
-    return redirect(url_for('admin_article.show_article'))
+    return redirect(url_for('admin_chaussure.show_chaussure'))
 
-@admin_article.route('/admin/article/delete', methods=['POST'])
-def delete_article():
+@admin_chaussure.route('/admin/chaussure/delete', methods=['POST'])
+def delete_chaussure():
     # id = request.args.get('id', '')
     id = request.form.get('id', '')
 
-    print("un article supprimé, id :", id)
-    flash(u'un article supprimé, id : ' + id)
-    return redirect(url_for('admin_article.show_article'))
+    print("un chaussure supprimé, id :", id)
+    flash(u'un chaussure supprimé, id : ' + id)
+    return redirect(url_for('admin_chaussure.show_chaussure'))
 
-@admin_article.route('/admin/article/edit/<int:id>', methods=['GET'])
-def edit_article(id):
+@admin_chaussure.route('/admin/chaussure/edit/<int:id>', methods=['GET'])
+def edit_chaussure(id):
     mycursor = get_db().cursor()
-    article = None
-    types_articles = None
-    return render_template('admin/article/edit_article.html', article=article, types_articles=types_articles)
+    chaussure = None
+    types_chaussures = None
+    return render_template('admin/chaussure/edit_chaussure.html', chaussure=chaussure, types_chaussures=types_chaussures)
 
-@admin_article.route('/admin/article/edit', methods=['POST'])
-def valid_edit_article():
+@admin_chaussure.route('/admin/chaussure/edit', methods=['POST'])
+def valid_edit_chaussure():
     nom = request.form['nom']
     id = request.form.get('id', '')
-    type_article_id = request.form.get('type_article_id', '')
-    #type_article_id = int(type_article_id)
+    type_chaussure_id = request.form.get('type_chaussure_id', '')
+    #type_chaussure_id = int(type_chaussure_id)
     prix = request.form.get('prix', '')
     stock = request.form.get('stock', '')
     description = request.form.get('description', '')
     image = request.form.get('image', '')
 
-    print(u'article modifié , nom : ', nom, ' - type_article:', type_article_id, ' - prix:', prix, ' - stock:', stock, ' - description:', description, ' - image:', image)
-    message = u'article modifié , nom:'+nom + '- type_article:' + type_article_id + ' - prix:' + prix + ' - stock:'+  stock + ' - description:' + description + ' - image:' + image
+    print(u'chaussure modifié , nom : ', nom, ' - type_chaussure:', type_chaussure_id, ' - prix:', prix, ' - stock:', stock, ' - description:', description, ' - image:', image)
+    message = u'chaussure modifié , nom:'+nom + '- type_chaussure:' + type_chaussure_id + ' - prix:' + prix + ' - stock:'+  stock + ' - description:' + description + ' - image:' + image
     flash(message)
-    return redirect(url_for('admin_article.show_article'))
+    return redirect(url_for('admin_chaussure.show_chaussure'))
