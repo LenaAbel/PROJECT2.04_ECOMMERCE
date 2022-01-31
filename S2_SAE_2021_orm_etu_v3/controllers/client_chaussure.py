@@ -5,23 +5,23 @@ from flask import Flask, request, render_template, redirect, url_for, abort, fla
 
 from connexion_db import get_db
 
-client_article = Blueprint('client_article', __name__,
+client_chaussure = Blueprint('client_chaussure', __name__,
                         template_folder='templates')
 
-@client_article.route('/client/index')
-@client_article.route('/client/article/show')      # remplace /client
-def client_article_show():                                 # remplace client_index
+@client_chaussure.route('/client/index')
+@client_chaussure.route('/client/chaussure/show')      # remplace /client
+def client_chaussure_show():                                 # remplace client_index
     mycursor = get_db().cursor()
-    articles = []
-    types_articles = []
-    articles_panier = []
+    chaussures = []
+    types_chaussures = []
+    chaussures_panier = []
     prix_total = None
-    return render_template('client/boutique/panier_article.html', articles=articles, articlesPanier=articles_panier, prix_total=prix_total, itemsFiltre=types_articles)
+    return render_template('client/boutique/panier_chaussure.html', chaussures=chaussures, chaussuresPanier=chaussures_panier, prix_total=prix_total, itemsFiltre=types_chaussures)
 
-@client_article.route('/client/article/details/<int:id>', methods=['GET'])
-def client_article_details(id):
+@client_chaussure.route('/client/chaussure/details/<int:id>', methods=['GET'])
+def client_chaussure_details(id):
     mycursor = get_db().cursor()
-    article=None
+    chaussure=None
     commentaires=None
-    commandes_articles=None
-    return render_template('client/boutique/article_details.html', article=article, commentaires=commentaires, commandes_articles=commandes_articles)
+    commandes_chaussures=None
+    return render_template('client/boutique/chaussure_details.html', chaussure=chaussure, commentaires=commentaires, commandes_chaussures=commandes_chaussures)
