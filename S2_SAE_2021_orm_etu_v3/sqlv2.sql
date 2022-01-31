@@ -217,7 +217,7 @@ INSERT INTO MESURE VALUES (1, 18),
 
 INSERT INTO EST_DE_COULEUR VALUES (1, 11),
                                   (2, 2),
-                                  (3, 3,
+                                  (3, 3),
                                    (4, 11),
                                    (5, 10),
                                    (6, 7),
@@ -230,7 +230,7 @@ INSERT INTO EST_DE_COULEUR VALUES (1, 11),
 );
 
 INSERT INTO PANIER VALUES (NULL, '2019-12-19', 49.99, 1, 1, 1),
-                          (NULL, '2020-01-05', 79.99, 2, 2, 2),
+                          (NULL, '202 0-01-05', 79.99, 2, 2, 2),
                           (NULL, '2020-01-05', 69.99, 1, 3, 4),
                           (NULL, '2020-01-05', 35.99, 2, 10, 6),
                           (NULL, '2020-01-05', 99.99, 1, 11, 7),
