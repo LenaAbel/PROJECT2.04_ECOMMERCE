@@ -12,16 +12,20 @@ client_panier = Blueprint('client_panier', __name__,
 @client_panier.route('/client/panier/add', methods=['POST'])
 def client_panier_add():
     mycursor = get_db().cursor()
-
+    client_id = session['user_id']
+    id_chaussure = request.form.get('id_chaussure')
+    quantite = request.form.get('quantite')
+    sql = "SELECT * FROM PANIER WHERE id_chaussure=%s AND id_utilisateur=%s"
+    mycursor.execute(sql,(id_chaussure, client_id))
+    chaussure_panier=mycursor.fetchone()
+    mycursor.execute("SELECT * FROM PANIER WHERE id_chaussure=%s AND id_utilisateur=%s", (id_chaussure))
     return redirect('/client/chaussure/show')
-    #return redirect(url_for('client_index'))
 
 @client_panier.route('/client/panier/delete', methods=['POST'])
 def client_panier_delete():
     mycursor = get_db().cursor()
 
     return redirect('/client/chaussure/show')
-    #return redirect(url_for('client_index'))
 
 
 @client_panier.route('/client/panier/vider', methods=['POST'])
