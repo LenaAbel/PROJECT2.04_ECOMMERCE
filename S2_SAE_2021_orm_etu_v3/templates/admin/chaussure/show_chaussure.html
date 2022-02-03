@@ -1,13 +1,58 @@
 {% extends 'admin/layout_admin.html' %}
 
 {% block title %}
-    <title>afficher les chaussures</title>
+    <title>Afficher les chaussures</title>
 {% endblock %}
 
 {% block body %}
-<h3>Chaussures</h3>
-<a  class="btn btn-outline-success" href="/admin/chaussure/add">ajouter un chaussure</a>
-<br><br>
-
-
+    <h3>Chaussures</h3>
+    <a class="btn btn-outline-success" href="/admin/chaussure/add">Ajouter un chaussure</a>
+    <br><br>
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nom </th>
+            <th>Marque</th>
+            <th>Fournisseur</th>
+            <th>Type chaussure</th>
+            <th>Image</th>
+            <th>Opération</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if chaussures | length >= 1 %}
+            {% for ligne in chaussures %}
+                <tr>
+                    <td>{{ ligne.id_chaussure }}</td>
+                    <td>{{ ligne.nom_chaussure }}</td>
+                    <td>{{ ligne.marque_chaussure }}</td>
+                    <td>{{ ligne.fournisseur_chaussure }}</td>
+                    <td>{{ ligne.id_type_chaussure }}</td>
+                    <td>
+                        {# {{ ligne.image_chaussure }}#}
+                        {% if ligne.image_chaussure is not none %}
+                            <img style="width:40px;height:40px"
+                                 src="{{ url_for('static', filename = 'image_chaussures/' + ligne['image_chaussure']) }}"
+                                 alt="image_chaussure  de {{ ligne.nom_chaussure }}">
+                        {% else %}
+                            <img style="width:40px;height:40px"
+                                 src="{{ url_for('static', filename='images/no_photo.jpeg') }}" alt="no image">
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/chaussure/edit/{{ ligne.id }}">Editer</a><a href="/chaussure/delete?id={{ ligne.id }}"
+                                                                          onclick="return confirm('Are you sure?')">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>
+                    Pas un article.
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
 {% endblock %}
