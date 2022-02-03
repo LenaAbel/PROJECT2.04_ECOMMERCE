@@ -11,15 +11,20 @@ admin_chaussure = Blueprint('admin_chaussure', __name__,
 @admin_chaussure.route('/admin/chaussure/show')
 def show_chaussure():
     mycursor = get_db().cursor()
-    chaussures = None
-    # print(chaussures)
+    sql = "SELECT * FROM CHAUSSURE"
+    mycursor.execute(sql)
+    chaussures = mycursor.fetchall()
+    print(chaussures)
     return render_template('admin/chaussure/show_chaussure.html', chaussures=chaussures)
 
 @admin_chaussure.route('/admin/chaussure/add', methods=['GET'])
 def add_chaussure():
     mycursor = get_db().cursor()
-    types_chaussures = None
-    return render_template('admin/chaussure/add_chaussure.html', types_chaussures=types_chaussures)
+    sql = "SELECT * FROM TYPE_CHAUSSURE"
+    mycursor.execute(sql)
+    types_chaussures = mycursor.fetchall()
+    print(types_chaussures)
+    return render_template('admin/chaussure/add_chaussure.html', type_chaussure=types_chaussures)
 
 @admin_chaussure.route('/admin/chaussure/add', methods=['POST'])
 def valid_add_chaussure():
@@ -42,8 +47,8 @@ def delete_chaussure():
     # id = request.args.get('id', '')
     id = request.form.get('id', '')
 
-    print("un chaussure supprimé, id :", id)
-    flash(u'un chaussure supprimé, id : ' + id)
+    print("Une chaussure supprimée, id :", id)
+    flash(u'Une chaussure supprimée, id : ' + id)
     return redirect(url_for('admin_chaussure.show_chaussure'))
 
 @admin_chaussure.route('/admin/chaussure/edit/<int:id>', methods=['GET'])
@@ -64,7 +69,7 @@ def valid_edit_chaussure():
     description = request.form.get('description', '')
     image = request.form.get('image', '')
 
-    print(u'chaussure modifié , nom : ', nom, ' - type_chaussure:', type_chaussure_id, ' - prix:', prix, ' - stock:', stock, ' - description:', description, ' - image:', image)
-    message = u'chaussure modifié , nom:'+nom + '- type_chaussure:' + type_chaussure_id + ' - prix:' + prix + ' - stock:'+  stock + ' - description:' + description + ' - image:' + image
+    print(u'Chaussure modifiée , nom : ', nom, ' - type_chaussure:', type_chaussure_id, ' - prix:', prix, ' - stock:', stock, ' - description:', description, ' - image:', image)
+    message = u'Chaussure modifiée , nom:'+nom + '- type_chaussure:' + type_chaussure_id + ' - prix:' + prix + ' - stock:'+  stock + ' - description:' + description + ' - image:' + image
     flash(message)
     return redirect(url_for('admin_chaussure.show_chaussure'))
