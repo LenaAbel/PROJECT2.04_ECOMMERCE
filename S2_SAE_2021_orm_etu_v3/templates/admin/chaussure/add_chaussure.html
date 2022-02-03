@@ -1,13 +1,47 @@
 {% extends 'admin/layout_admin.html' %}
 
 {% block title %}
-    <title>ajouter un chaussure</title>
+    <title>Ajouter un chaussure</title>
 {% endblock %}
 
 {% block body %}
-  <h2>ajout d'un chaussure</h2>
-  {% if error %}
-    <p class=error><strong>Error:</strong> {{ error }}
-  {% endif %}
+    <h2>Ajout d'un chaussure</h2>
+    {% if error %}
+        <p class=error><strong>Error:</strong> {{ error }}
+    {% endif %}
+    <form method="post" action="/hotel/add" {#action="{{ url_for('valid_add_type_station') }}"#} >
+        <fieldset>
+            <form>
+                <div class="form-group">
+                    <label for="nom_chaussure"> Nom de la chaussure</label><br>
+                    <input id="nom_chaussure" type="text" name="nom_chaussure" size="18" value=""
+                           placeholder="Saisir le nom de la chaussure" required>
+                </div>
 
+                <div class="form-group">
+                    <label for="station_id"> Types chaussure </label><br>
+                </div>
+                <select name="id_type_chaussure" required>
+                    <option value="">Sélectionner un type de chaussure</option>
+                    {% for ligne in types_chaussures %}
+                        <option value="{{ ligne.id_type_chaussure }}"> {{ ligne.nom_type_chaussure }} </option>
+                    {% endfor %}
+                </select>
+                <br>
+
+                <div class="form-group">
+                    <label for="marque_chaussure">Marque  de chaussure</label><br>
+                    <input id="marque_chaussure" type="text" name="marque_chaussure" size="18" value=""
+                           placeholder="Saisir la marque ">
+                    <br>
+                </div>
+                <div class="form-group">
+                    <label for="image"> Image Produit</label><br>
+                    <input type="file" name="image">
+                </div>
+                <button type="submit" class="btn btn-primary">Ajouter cette chaussure</button>
+
+            </form>
+        </fieldset>
+    </form>
 {% endblock %}
