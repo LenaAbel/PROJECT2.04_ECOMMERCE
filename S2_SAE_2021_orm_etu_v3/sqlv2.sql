@@ -173,18 +173,18 @@ INSERT INTO POINTURE VALUES (NULL, 36.0),
                             (NULL, 47.5),
                             (NULL, 48.0);
 
-INSERT INTO CHAUSSURE VALUES (NULL, 'Oui', 'NIKE', 'Point C', NULL, 1),
-                             (NULL, 'Non', 'Balenciago', 'Botru-Chausse',NULL, 1),
-                             (NULL, 'Corail', 'Cannonne', 'Drof', NULL, 4),
-                             (NULL, 'Alpha', 'Letin', 'Nozama', NULL, 6),
-                             (NULL, 'Zilla', 'Nokin', 'Eaki', NULL, 3),
-                             (NULL, 'Ethernal', 'Ssegue', 'Odentinne', NULL, 5),
-                             (NULL, 'Octo', 'NIKE', 'Point C', NULL, 2),
-                             (NULL, 'Virtuos', 'Balenciago', 'Botru-Chausse', NULL, 2),
-                             (NULL, 'Elite', 'Cannonne', 'Drof', NULL, 4),
-                             (NULL, 'Digi', 'Letin', 'Nozama', NULL, 6),
-                             (NULL, 'Star', 'Nokin', 'Eaki', NULL, 3),
-                             (NULL, 'Joker', 'Ssegue', 'Odentinne', NULL, 5);
+INSERT INTO CHAUSSURE VALUES (NULL, 'Galaxy', 'NIKE', 'Point C', 'galaxy_nike.jpg',1),
+                             (NULL, 'Illusion', 'Balenciago', 'Botru-Chausse','illusion_balenciago.jpg', 2),
+                             (NULL, 'Corail', 'Cannonne', 'Drof', corail_cannonne.jpg, 4),
+                             (NULL, 'Alpha', 'Letin', 'Nozama', 'alpha_letin.jpg', 6),
+                             (NULL, 'Zilla', 'Nokin', 'Eaki', 'zilla_nokin.jpg', 3),
+                             (NULL, 'Ethernal', 'Ssegue', 'Odentinne', ethernal_ssegue.jpg, 5),
+                             (NULL, 'Octo', 'NIKE', 'Point C', 'octo_nike.jpg', 1),
+                             (NULL, 'Virtuos', 'Balenciago', 'Botru-Chausse', virtuos_balenciago.jpg, 2),
+                             (NULL, 'Elite', 'Cannonne', 'Drof', 'elite_cannonne.jpg', 4),
+                             (NULL, 'Digi', 'Letin', 'Nozama', 'digi_letin.jpg', 6),
+                             (NULL, 'Star', 'Nokin', 'Eaki', 'star_nokin.jpg', 3),
+                             (NULL, 'Joker', 'Ssegue', 'Odentinne', 'joker_ssegue.jpg', 5);
 
 INSERT INTO LIGNE_COMMANDE VALUES (1, 1, 49.99, 1),
                                   (2, 2, 79.99, 2),
@@ -246,4 +246,3 @@ SELECT * FROM LIGNE_COMMANDE;
 SELECT * FROM MESURE;
 SELECT * FROM EST_DE_COULEUR;
 SELECT * FROM PANIER;
-
