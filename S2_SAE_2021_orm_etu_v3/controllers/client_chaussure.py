@@ -2,26 +2,26 @@
 # -*- coding:utf-8 -*-
 from flask import Blueprint
 from flask import Flask, request, render_template, redirect, url_for, abort, flash, session, g
-from datetime import datetime
+
 from connexion_db import get_db
 
-client_commande = Blueprint('client_commande', __name__,
+client_chaussure = Blueprint('client_chaussure', __name__,
                         template_folder='templates')
 
-
-@client_commande.route('/client/commande/add', methods=['POST'])
-def client_commande_add():
+@client_chaussure.route('/client/index')
+@client_chaussure.route('/client/chaussure/show')      # remplace /client
+def client_chaussure_show():                                 # remplace client_index
     mycursor = get_db().cursor()
-    flash(u'Commande ajoutée')
-    return redirect('/client/chaussure/show')
-    #return redirect(url_for('client_index'))
+    chaussures = []
+    types_chaussures = []
+    chaussures_panier = []
+    prix_total = None
+    return render_template('client/boutique/panier_chaussure.html', chaussures=chaussures, chaussuresPanier=chaussures_panier, prix_total=prix_total, itemsFiltre=types_chaussures)
 
-
-
-@client_commande.route('/client/commande/show', methods=['get','post'])
-def client_commande_show():
+@client_chaussure.route('/client/chaussure/details/<int:id>', methods=['GET'])
+def client_chaussure_details(id):
     mycursor = get_db().cursor()
-    commandes = None
-    chaussures_commande = None
-    return render_template('client/commandes/show.html', commandes=commandes, chaussures_commande=chaussures_commande)
-
+    chaussure=None
+    commentaires=None
+    commandes_chaussures=None
+    return render_template('client/boutique/chaussure_details.html', chaussure=chaussure, commentaires=commentaires, commandes_chaussures=commandes_chaussures)
