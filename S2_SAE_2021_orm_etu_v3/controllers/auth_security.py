@@ -22,7 +22,7 @@ def auth_login_post():
     username = request.form.get('username')
     password = request.form.get('password')
     tuple_select = (username)
-    sql = "SELECT EXISTS(SELECT * FROM UTILISATEUR WHERE username=%s"
+    sql = " SELECT *  FROM UTILISATEUR WHERE username=%s"
     retour = mycursor.execute(sql, tuple_select)
     user = mycursor.fetchone()
     if user:
@@ -33,12 +33,12 @@ def auth_login_post():
         else:
             session['username'] = user['username']
             session['role'] = user['role']
-            session['user_id'] = user['id']
+            session['user_id'] = user['id_utilisateur']
             print(user['username'], user['role'])
             if user['role'] == 'ROLE_admin':
                 return redirect('/admin/commande/index')
             else:
-                return redirect('/client/chaussure/show')
+                return redirect('/client/article/show')
     else:
         flash(u'Vérifier votre login et essayer encore.')
         return redirect('/login')
@@ -55,32 +55,32 @@ def auth_signup_post():
     username = request.form.get('username')
     password = request.form.get('password')
     tuple_select = (username, email)
-    sql = "SELECT username, email FROM UTILISATEUR WHERE username=%s AND email=%s"
+    sql = "SELECT * FROM UTILISATEUR WHERE username=%s OR email=%s"
     retour = mycursor.execute(sql, tuple_select)
     user = mycursor.fetchone()
     if user:
-        flash(u'votre adresse <strong>Email</strong> ou  votre <strong>Username</strong> (login) existe déjà.')
+        flash(u'votre adresse <strong>Email</strong> ou  votre <strong>Username</strong> (login) existe déjà')
         return redirect('/signup')
 
     # ajouter un nouveau user
     password = generate_password_hash(password, method='sha256')
     tuple_insert = (username, email, password, 'ROLE_client')
-    sql = "INSERT INTO UTILISATEUR(id_utilisateur, username, password, role, email) VALUES (NULL, %s, %s, %s, %s)"
+    sql = "INSERT INTO UTILISATEUR(username, email, password, role) VALUES (%s, %s, %s, %s)"
     mycursor.execute(sql, tuple_insert)
     get_db().commit()                    # position de cette ligne discutatble !
-    #sql='''requete4'''
-    #mycursor.execute(sql)
-    #info_last_id = mycursor.fetchone()
-    #user_id = info_last_id['last_insert_id']
-    #print('last_insert_id', user_id)
+    sql = "SELECT last_insert_id() AS last_insert_id;"
+    mycursor.execute(sql)
+    info_last_id = mycursor.fetchone()
+    user_id = info_last_id['last_insert_id']
+    print('last_insert_id', user_id)
     get_db().commit()
     session.pop('username', None)
     session.pop('role', None)
     session.pop('user_id', None)
     session['username'] = username
     session['role'] = 'ROLE_client'
-    #session['user_id'] = user_id
-    return redirect('/client/chaussure/show')
+    session['user_id'] = user_id
+    return redirect('/client/article/show')
     #return redirect(url_for('client_index'))
 
 
@@ -95,4 +95,3 @@ def auth_logout():
 @auth_security.route('/forget-password', methods=['GET'])
 def forget_password():
     return render_template('auth/forget_password.html')
-
