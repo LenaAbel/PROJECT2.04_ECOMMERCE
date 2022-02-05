@@ -1,4 +1,4 @@
-# SAEDPT
+# SAEADPT
 Ce répertoire regroupe le travail de ABEL Léna, DUBOL Lucas, PICOT Nicolas et TOILLON Samuel pour la SAE204.
 
 ### **En quoi consiste cette SAÉ?**
