@@ -63,6 +63,8 @@ CREATE TABLE IF NOT EXISTS CHAUSSURE(
    marque_chaussure VARCHAR(50),
    fournisseur_chaussure VARCHAR(50),
    image_chaussure VARCHAR(50),
+   prix_chaussure NUMERIC(6,2),
+   stock_chaussure INT,
    id_type_chaussure INT,
    PRIMARY KEY(id_chaussure),
    FOREIGN KEY(id_type_chaussure) REFERENCES TYPE_CHAUSSURE(id_type_chaussure)
@@ -114,16 +116,18 @@ INSERT INTO ETAT VALUES (NULL,'Expediée'),
                         (NULL,'En Cours'),
                         (NULL,'Reçu');
 
-INSERT INTO COMMANDE VALUES (NULL, '2019-12-20', 2, 3),
+INSERT INTO COMMANDE VALUES (NULL, '2019-12-20', 2, 2),
                             (NULL, '2021-02-03', 1, 3),
                             (NULL, '2021-09-29', 3, 2),
-                            (NULL, '2021-12-07', 1, 1),
+                            (NULL, '2021-12-07', 1, 3),
                             (NULL, '2019-05-19', 1, 3),
-                            (NULL, '2022-01-25', 2, 1),
+                            (NULL, '2022-01-25', 2, 2),
                             (NULL, '2021-11-11', 2, 2),
                             (NULL, '2020-12-25', 1, 3),
                             (NULL, '2020-07-12', 3, 2),
-                            (NULL, '2020-01-05', 3, 3);
+                            (NULL, '2020-01-05', 3, 3),
+                            (NULL, '2020-10-14', 3, 2),
+                            (NULL, '2020-04-08', 3, 2);
 
 
 INSERT INTO TYPE_CHAUSSURE VALUES (NULL, 'Baskets'),
@@ -173,18 +177,18 @@ INSERT INTO POINTURE VALUES (NULL, 36.0),
                             (NULL, 47.5),
                             (NULL, 48.0);
 
-INSERT INTO CHAUSSURE VALUES (NULL, 'Galaxy', 'NIKE', 'Point C', 'galaxy_nike.png',1),
-                             (NULL, 'Illusion', 'Balenciago', 'Botru-Chausse','illusion_balenciago.png', 2),
-                             (NULL, 'Corail', 'Cannonne', 'Drof', 'corail_cannonne.png', 4),
-                             (NULL, 'Alpha', 'Letin', 'Nozama', 'alpha_letin.png', 6),
-                             (NULL, 'Zilla', 'Nokin', 'Eaki', 'zilla_nokin.png', 3),
-                             (NULL, 'Ethernal', 'Ssegue', 'Odentinne', 'ethernal_ssegue.png', 5),
-                             (NULL, 'Octo', 'NIKE', 'Point C', 'octo_nike.png', 1),
-                             (NULL, 'Virtuos', 'Balenciago', 'Botru-Chausse', 'virtuos_balenciago.png', 2),
-                             (NULL, 'Elite', 'Cannonne', 'Drof', 'elite_cannonne.png', 4),
-                             (NULL, 'Digi', 'Letin', 'Nozama', 'digi_letin.png', 6),
-                             (NULL, 'Star', 'Nokin', 'Eaki', 'star_nokin.png', 3),
-                             (NULL, 'Joker', 'Ssegue', 'Odentinne', 'joker_ssegue.png', 5);
+INSERT INTO CHAUSSURE VALUES (NULL, 'Galaxy', 'NIKE', 'Point C', 'galaxy_nike.png',49.99, 20,1),
+                             (NULL, 'Illusion', 'Balenciago', 'Botru-Chausse','illusion_balenciago.png',79.99, 10, 1),
+                             (NULL, 'Corail', 'Cannonne', 'Drof', 'corail_cannonne.png', 69.99, 50,4),
+                             (NULL, 'Alpha', 'Letin', 'Nozama', 'alpha_letin.png', 49.99, 50, 6),
+                             (NULL, 'Zilla', 'Nokin', 'Eaki', 'zilla_nokin.png', 39.99, 3,3),
+                             (NULL, 'Ethernal', 'Ssegue', 'Odentinne', 'ethernal_ssegue.jpg', 25.99, 30, 5),
+                             (NULL, 'Octo', 'NIKE', 'Point C', 'octo_nike.png', 12.99,15,2),
+                             (NULL, 'Virtuos', 'Balenciago', 'Botru-Chausse', 'virtuos_balenciago.png',29.99,21, 2),
+                             (NULL, 'Elite', 'Cannonne', 'Drof', 'elite_cannonne.png', 59.99,7,4),
+                             (NULL, 'Digi', 'Letin', 'Nozama', 'digi_letin.png',  35.99,70,6),
+                             (NULL, 'Star', 'Nokin', 'Eaki', 'star_nokin.png', 99.99,5,3),
+                             (NULL, 'Joker', 'Ssegue', 'Odentinne', 'joker_ssegue.png',10.99,90, 5);
 
 INSERT INTO LIGNE_COMMANDE VALUES (1, 1, 49.99, 1),
                                   (2, 2, 79.99, 2),
@@ -195,7 +199,9 @@ INSERT INTO LIGNE_COMMANDE VALUES (1, 1, 49.99, 1),
                                   (7, 9, 59.99, 1),
                                   (8, 5, 39.99, 2),
                                   (9, 8, 29.99, 2),
-                                  (10, 6, 25.99, 1);
+                                  (10, 6, 25.99, 1),
+                                  (11, 12, 10.99,1),
+                                  (12, 7, 12.99,3);
 
 
 INSERT INTO MESURE VALUES (1, 18),
