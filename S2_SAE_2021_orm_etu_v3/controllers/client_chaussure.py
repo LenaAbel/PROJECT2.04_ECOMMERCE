@@ -12,7 +12,9 @@ client_chaussure = Blueprint('client_chaussure', __name__,
 @client_chaussure.route('/client/chaussure/show')      # remplace /client
 def client_chaussure_show():                                 # remplace client_index
     mycursor = get_db().cursor()
-    chaussures = []
+    sql = "SELECT * FROM CHAUSSURE"
+    retour = mycursor.execute(sql)
+    chaussures = mycursor.fetchone()
     types_chaussures = []
     chaussures_panier = []
     prix_total = None
