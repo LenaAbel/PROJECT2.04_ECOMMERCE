@@ -28,12 +28,14 @@
                     <td>{{ ligne.nom_chaussure }}</td>
                     <td>{{ ligne.marque_chaussure }}</td>
                     <td>{{ ligne.fournisseur_chaussure }}</td>
+
+
                     <td>{{ ligne.id_type_chaussure }}</td>
                     <td>
                         {# {{ ligne.image_chaussure }}#}
                         {% if ligne.image_chaussure is not none %}
                             <img style="width:40px;height:40px"
-                                 src="{{ url_for('static', filename = 'image_chaussures/' + ligne['image_chaussure']) }}"
+                                 src="{{ url_for('static', filename = 'images/' + ligne['image_chaussure']) }}"
                                  alt="image_chaussure  de {{ ligne.nom_chaussure }}">
                         {% else %}
                             <img style="width:40px;height:40px"
@@ -41,8 +43,7 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="/chaussure/edit/{{ ligne.id }}">Editer</a><a href="/chaussure/delete?id={{ ligne.id }}"
-                                                                          onclick="return confirm('Are you sure?')">Supprimer</a>
+                        <a href="/chaussure/edit/{{ ligne.id }}">Editer</a><a href="/chaussure/delete?id={{ ligne.id }}" onclick="return confirm('Are you sure?')">Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}
