@@ -14,7 +14,7 @@ def client_chaussure_show():                                 # remplace client_i
     mycursor = get_db().cursor()
     sql = "SELECT * FROM CHAUSSURE"
     retour = mycursor.execute(sql)
-    chaussures = mycursor.fetchone()
+    chaussures = mycursor.fetchall()
     types_chaussures = []
     chaussures_panier = []
     prix_total = None

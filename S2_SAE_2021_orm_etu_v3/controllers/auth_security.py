@@ -68,7 +68,7 @@ def auth_signup_post():
     sql = "INSERT INTO UTILISATEUR(username, email, password, role) VALUES (%s, %s, %s, %s)"
     mycursor.execute(sql, tuple_insert)
     get_db().commit()                    # position de cette ligne discutatble !
-    sql = "SELECT last_insert_id() AS last_insert_id;"
+    sql = "SELECT last_insert_id() AS last_insert_id"
     mycursor.execute(sql)
     info_last_id = mycursor.fetchone()
     user_id = info_last_id['last_insert_id']

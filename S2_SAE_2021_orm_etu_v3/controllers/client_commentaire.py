@@ -11,7 +11,7 @@ client_commentaire = Blueprint('client_commentaire', __name__,
 @client_commentaire.route('/client/comment/add', methods=['POST'])
 def client_comment_add():
     mycursor = get_db().cursor()
-    chaussure_id = request.form.get('idchaussure', None)
+    chaussure_id = request.form.get('id_chaussure', None)
 
     return redirect('/client/chaussure/details/'+chaussure_id)
     #return redirect(url_for('client_chaussure_details', id=int(chaussure_id)))
@@ -19,7 +19,7 @@ def client_comment_add():
 @client_commentaire.route('/client/comment/delete', methods=['POST'])
 def client_comment_detete():
     mycursor = get_db().cursor()
-    chaussure_id = request.form.get('idchaussure', None)
+    chaussure_id = request.form.get('id_chaussure', None)
 
     return redirect('/client/chaussure/details/'+chaussure_id)
     #return redirect(url_for('client_chaussure_details', id=int(chaussure_id)))

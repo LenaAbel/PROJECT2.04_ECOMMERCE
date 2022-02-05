@@ -24,3 +24,4 @@ def client_commande_show():
     commandes = None
     chaussures_commande = None
     return render_template('client/commandes/show.html', commandes=commandes, chaussures_commande=chaussures_commande)
+

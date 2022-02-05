@@ -44,3 +44,10 @@ def valid_edit_type_chaussure():
     id_type_chaussure = request.form.get('id', '')
     flash(u'type chaussure modifié, id: ' + id_type_chaussure + " libelle : " + libelle)
     return redirect('/admin/type-chaussure/show') #url_for('show_type_chaussure')
+
+
+
+
+
+
+
