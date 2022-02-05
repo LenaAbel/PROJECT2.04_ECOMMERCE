@@ -38,7 +38,7 @@ def auth_login_post():
             if user['role'] == 'ROLE_admin':
                 return redirect('/admin/commande/index')
             else:
-                return redirect('/client/article/show')
+                return redirect('/client/chaussure/show')
     else:
         flash(u'Vérifier votre login et essayer encore.')
         return redirect('/login')
@@ -80,7 +80,7 @@ def auth_signup_post():
     session['username'] = username
     session['role'] = 'ROLE_client'
     session['user_id'] = user_id
-    return redirect('/client/article/show')
+    return redirect('/client/chaussure/show')
     #return redirect(url_for('client_index'))
 
 
