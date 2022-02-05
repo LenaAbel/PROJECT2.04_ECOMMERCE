@@ -3,13 +3,13 @@
 <div class="container">
     <div class="row">
          <h2 class="card-title">
-             <span style="color: #0b2e13">{{ chaussure.nom }}</span> &nbsp;{{ chaussure.prix }} €
+             <span style="color: #0b2e13">{{ chaussure.nom_chaussure }}</span> &nbsp;{{ chaussure.prix }} €
          </h2>
 
         <div class="card-body">
         {%  if chaussure.image is not none %}
-            <img class="card-img-top rounded mx-auto d-block"  style="width:100px;height:100px"  src="{{ url_for('static', filename = 'images/' + chaussure['image']) }}"  alt="image  de {{ chaussure.nom }}" >
-        {% else %} <img class="card-img-top rounded mx-auto d-block"   style="width:100px;height:100px"   src="{{ url_for('static', filename='images/no_photo.jpeg')}}"  alt="image  de {{ chaussure.nom }}" >
+            <img class="card-img-top rounded mx-auto d-block"  style="width:100px;height:100px"  src="{{ url_for('static', filename = 'images/' + chaussure['image']) }}"  alt="image  de {{ chaussure.nom_chaussure }}" >
+        {% else %} <img class="card-img-top rounded mx-auto d-block"   style="width:100px;height:100px"   src="{{ url_for('static', filename='images/no_photo.jpeg')}}"  alt="image  de {{ chaussure.nom_chaussure }}" >
         {% endif %}
 
         </div>
@@ -30,7 +30,7 @@
                     <input type="number" name="note" id="inputNote" step="0.1" min="0" max="5" class="form-control" style="width: 8rem !important;" value="" >
                 </div>
                 <input type="hidden" name="idUser" value="{{ session['user_id'] }}">
-                <input type="hidden" name="idchaussure" value="{{ chaussure.id }}">
+                <input type="hidden" name="idchaussure" value="{{ chaussure.id_chaussure }}">
                 <form  action="/client/comment/add" style="display: inline-block;"  method="post" >
                         <button class="btn btn-primary" > Ajouter un avis </button>
                 </form>
@@ -60,7 +60,7 @@
             {% if commentaires %}
                 {% for commentaire in commentaires %}
                     <tr>
-                        <td>{{ commentaire.user_id }}</td>
+                        <td>{{ commentaire.id_utilisateur }}</td>
                         <td>{{ commentaire.commentaire }}</td>
                         <td>{{ commentaire.note }}
                         {{ commentaire.__dict__ }}
@@ -68,8 +68,8 @@
                         <td>
                             {% if commentaire.user_id == session['user_id'] %}
                                   <form  action="/client/comment/delete"  style="display: inline-block;"  method="post" >
-                                      <input type="hidden" name="idchaussure" value="{{ commentaire.chaussure_id }}">
-                                      <input type="hidden" name="idUser" value="{{ commentaire.user_id }}">
+                                      <input type="hidden" name="idchaussure" value="{{ commentaire.id_chaussure }}">
+                                      <input type="hidden" name="idUser" value="{{ commentaire.id_utilisateur }}">
                                       <input type="hidden" name="idAvis" value="{{ commentaire.id }}">
                                       <button class="btn btn-primary" > supprimer </button>
                                   </form>
