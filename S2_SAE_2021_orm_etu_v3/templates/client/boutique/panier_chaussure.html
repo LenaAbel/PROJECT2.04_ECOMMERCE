@@ -77,53 +77,53 @@
                 {% for chaussure in chaussures  %}
                         <div class="card col-4 mt-4">
                             <div class="card-body border-dark rounded">
-                                <a href="/client/chaussure/details/{{ chaussure.id }}">
+                                <a href="/client/chaussure/details/{{ chaussure.id_chaussure }}">
                                 <h2 class="card-title">
-                                    <span style="color: #0b2e13">{{ chaussure.nom }}</span><br>
+                                    <span style="color: #0b2e13">{{ chaussure.nom_chaussure }}</span><br>
                                     {{ chaussure.prix }}
                                     €
                                 </h2>
                                 <div class="card-body">
-                                     {%  if chaussure.image is not none %}
-                                        <img class="card-img-top rounded mx-auto d-block"  style="width:100px;height:100px"  src="{{ url_for('static', filename = 'images/' + chaussure['image']) }}"  alt="image  de {{ chaussure.nom }}" >
-                                    {% else %} <img class="card-img-top rounded mx-auto d-block"   style="width:100px;height:100px"   src="{{ url_for('static', filename='images/no_photo.jpeg')}}"  alt="image  de {{ chaussure.nom }}" >
+                                     {%  if chaussure.image_chaussure is not none %}
+                                        <img class="card-img-top rounded mx-auto d-block"  style="width:100px;height:100px"  src="{{ url_for('static', filename = 'images/' + chaussure.image_chaussure) }}"  alt="image  de {{ chaussure.nom_chaussure }}" >
+                                    {% else %} <img class="card-img-top rounded mx-auto d-block"   style="width:100px;height:100px"   src="{{ url_for('static', filename='images/no_photo.png')}}"  alt="image  de {{ chaussure.nom_chaussure }}" >
                                     {% endif %}
                                     <hr>
                                 </div>
                                 </a>
                                 <div class="card-body">
                                         <form  action="/client/panier/add" method="post">
-                                            <input type="hidden" name="idchaussure" value="{{ chaussure.id }}">
+                                            <input type="hidden" name="idchaussure" value="{{ chaussure.id_chaussure }}">
                                             <button class="btn btn-success float-right">
                                                 <i class="fas fa-shopping-cart"></i>
                                                 Ajouter
                                              </button>
 
                                             <div class="input-group input-group-sm" style="width: 4rem !important;">
-                                                <input type="number" id="input-{{ chaussure.id }}" step="1" min="0" max="{{ chaussure.stock }}" class="form-control" style="width: 4rem !important;" value="1" name="quantite">
+                                                <input type="number" id="input-{{ chaussure.id_chaussure }}" step="1" min="0" max="{{ chaussure.stock_chaussure }}" class="form-control" style="width: 4rem !important;" value="1" name="quantite">
                                             </div>
                                         </form>
                                 </div>
                             </div>
                             <div class="card-footer">
-                            {% if chaussure.stock is defined %}
-                                 {% if chaussure.stock > 0 %}
-                                    <small class="text-muted">Stock restant : {{ chaussure.stock }}</small>
+                            {% if chaussure.stock_chaussure is defined %}
+                                 {% if chaussure.stock_chaussure > 0 %}
+                                    <small class="text-muted">Stock restant : {{ chaussure.stock_chaussure }}</small>
                                  {% else %}
-                                    <small class="text-muted">chaussure  momentanément indisponible</small>
+                                    <small class="text-muted">Chaussure  momentanément indisponible</small>
                                  {% endif %}
                             {% endif %}
                                 <br>
                             {% if chaussure.nb_notes is defined %}
                             {% if chaussure.nb_notes > 1 %}
-                                 <a  href="/client/chaussure/details/{{ chaussure.id }}">
+                                 <a  href="/client/chaussure/details/{{ chaussure.id_chaussure }}">
                                     <span style="color: #3A7734"> note : {{  "{:,.1f}".format(chaussure.moy_notes) }}</span>
                                  </a>
                             {% endif %}
                             {% endif %}
                             {% if chaussure.nb_avis is defined %}
                             {% if chaussure.nb_avis > 0 %}
-                                 <a href="/client/chaussure/details/{{ chaussure.id }}">
+                                 <a href="/client/chaussure/details/{{ chaussure.id_chaussure }}">
                                     <span style="color: #3A7734">({{ chaussure.nb_avis }} avis)</span>
                                  </a>
                             {% endif %}
