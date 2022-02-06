@@ -5,5 +5,3 @@
 - Création des définitions du app.py : DUBOL Lucas 1 & PICOT Nicolas
 - Modification des routes: ABEL Léna & TOILLON Samuel
 - Affichage des chaussures côtés admin:ABEL Léna & TOILLON Samuel
-- Créer la partie client: ABEL Léna
-- Ajout de add_chaussure
