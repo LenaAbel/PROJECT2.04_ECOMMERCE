@@ -16,6 +16,7 @@
             <th>Marque</th>
             <th>Fournisseur</th>
             <th>Type chaussure</th>
+            <th>Stock</th>
             <th>Image</th>
             <th>Opération</th>
         </tr>
@@ -28,9 +29,9 @@
                     <td>{{ ligne.nom_chaussure }}</td>
                     <td>{{ ligne.marque_chaussure }}</td>
                     <td>{{ ligne.fournisseur_chaussure }}</td>
-
-
                     <td>{{ ligne.id_type_chaussure }}</td>
+                    <td>{{ ligne.stock_chaussure }}</td>
+
                     <td>
                         {# {{ ligne.image_chaussure }}#}
                         {% if ligne.image_chaussure is not none %}
