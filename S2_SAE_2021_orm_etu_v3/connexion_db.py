@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, abort, flash, session, g
+from flask import g
 
 import pymysql.cursors
 
@@ -14,3 +14,4 @@ def get_db():
             cursorclass=pymysql.cursors.DictCursor
         )
     return db
+

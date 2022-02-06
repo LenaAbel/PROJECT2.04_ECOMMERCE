@@ -1,10 +1,7 @@
 #! /usr/bin/python
 # -*- coding:utf-8 -*-
+from flask import Flask, g
 
-from flask import Flask, request, render_template, redirect, url_for, abort, flash, session, g
-from flask import Blueprint
-
-from controllers import client_chaussure, admin_type_chaussure
 from controllers.auth_security import *
 
 from controllers.client_chaussure import *
