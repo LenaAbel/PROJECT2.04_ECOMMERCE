@@ -1,12 +1,51 @@
 {% extends 'admin/layout_admin.html' %}
 {% block title %}
-    <title>modifier un chaussure</title>
+    <title>Modifier un chaussure</title>
 {% endblock %}
 
 {% block body %}
-{#  <h2>modifier d'un chaussure</h2>#}
-  {% if error %}
-    <p class=error><strong>Error:</strong> {{ error }}
-  {% endif %}
+    <h2>Modifier une chaussure</h2>
+    {% if error %}
+        <p class=error><strong>Error:</strong> {{ error }}
+    {% endif %}
+    <form method="post" action="{{ url_for('admin_chaussure.valid_edit_chaussure') }}">
+        <fieldset>
+            <input type="hidden" name="id" size="18" value="{{ chaussure.id_chaussure }}">
+            <label for="nom_chaussure">Nom de la chaussure</label><br>
+            <input type="text" name="nom_chaussure" size="18" value="{{ chaussure.nom_chaussure }}">
+            <br>
 
+            <div class="form-group">
+                <label for="id_type_chaussure"> Type chaussure </label>
+            </div>
+            <select name="id_type_chaussure" required>
+                {% for type_chaussure in types_chaussures %}
+                    <option value="{{ type_chaussure.id_type_chaussure }}">{{ type_chaussure.nom_type_chaussure }}</option>
+                {% endfor %}
+            </select>
+
+            <br>
+            <label for="prix_chaussuere">Prix</label><br>
+            <input type="number" name="prix_chaussure" size="18" value="{{ chaussure.prix_chaussure }}">
+            <br>
+            <label for="stock_chaussure"> Stock</label><br>
+            <input type="number" name="stock_chaussure" size="18" value="{{ chaussure.stock_chaussure }}">
+            <br>
+            <label for="marque_chaussure"> Marque de chaussure</label><br>
+            <input type="text" name="marque_chaussure" size="18" value="{{ chaussure.marque_chaussure }}">
+            <br>
+            <label for="fournisseur_chaussure"> Fournisseur</label><br>
+            <input type="text" name="fournisseur_chaussure" size="18" value="{{ chaussure.fournisseur_chaussure }}">
+            <br>
+            <div class="form-group">
+                <label for="image_chaussure"> Image </label><br>
+                <input type="file" name="image_chaussure" size="18" value="{{ chaussure.image_chaussure }}">
+                <br>
+            </div>
+
+            <input type="hidden" name="id_type_chaussure" size="18" value="{{ chaussure.id_type_chaussure }}">
+
+            <button type="submit" class="btn btn-primary"> Modifier</button>
+        </fieldset>
+    </form>
 {% endblock %}

@@ -60,23 +60,37 @@ def delete_chaussure():
 
 @admin_chaussure.route('/admin/chaussure/edit/<int:id>', methods=['GET'])
 def edit_chaussure(id):
+    """ Edite une chaussure
+        @param id L'ID de la chaussure à éditer.
+    """
+    sql="SELECT * FROM CHAUSSURE WHERE id_chaussure=%s"
     mycursor = get_db().cursor()
-    chaussure = None
-    types_chaussures = None
+    mycursor.execute(sql, id)
+    chaussure = mycursor.fetchone()
+    sql="SELECT * FROM TYPE_CHAUSSURE"
+    mycursor.execute(sql)
+    types_chaussures = mycursor.fetchall()
     return render_template('admin/chaussure/edit_chaussure.html', chaussure=chaussure, types_chaussures=types_chaussures)
 
 @admin_chaussure.route('/admin/chaussure/edit', methods=['POST'])
 def valid_edit_chaussure():
-    nom = request.form['nom']
-    id = request.form.get('id', '')
-    type_chaussure_id = request.form.get('type_chaussure_id', '')
+    nom = request.form['nom_chaussure']
+    id = request.form.get('id_chaussure', '')
+    id_type = request.form.get('type_chaussure_id', '')
     #type_chaussure_id = int(type_chaussure_id)
-    prix = request.form.get('prix', '')
-    stock = request.form.get('stock', '')
-    description = request.form.get('description', '')
-    image = request.form.get('image', '')
-
-    print(u'Chaussure modifiée , nom : ', nom, ' - type_chaussure:', type_chaussure_id, ' - prix:', prix, ' - stock:', stock, ' - description:', description, ' - image:', image)
-    message = u'Chaussure modifiée , nom:'+nom + '- type_chaussure:' + type_chaussure_id + ' - prix:' + prix + ' - stock:'+  stock + ' - description:' + description + ' - image:' + image
+    prix = request.form.get('prix_chaussure', '')
+    stock = request.form.get('stock_chaussure', '')
+    marque = request.form.get('marque_chaussure', '')
+    fournisseur = request.form.get('fournisseur_chaussure', '')
+    # description= request.form.get('description', '')
+    image = request.form.get('image_chaussure', '')
+    tuple_update = (nom, id_type, prix, stock, marque, fournisseur, image, id)
+    sql = "UPDATE CHAUSSURE SET nom_chaussure=%s, id_type_chaussure=%s, prix_chaussure=%s, stock_chaussure=%s, marque_chaussure=%s, fournisseur_chaussure=%s,  \
+              image_chaussure=%s  WHERE id_chaussure=%s; "
+    mycursor = get_db().cursor()
+    res = mycursor.execute(sql, tuple_update)
+    res = get_db().commit()
+    print(u'Chaussure modifiée, Nom: ', nom, ' -ID: ', id,' - Type chaussure:', id_type, ' - Prix:', prix, ' - Stock:', stock,' - Marque:', marque, ' - Fournisseur:', fournisseur, ' - Image:', image)
+    message = u'Chaussure modifiée, Nom:' + nom + '- Type chaussure:' + id_type + ' - Prix:' + prix + ' - Stock:' + stock + ' - Marque:' + marque + ' - Fournisseur:' + fournisseur + ' - Image:' + image
     flash(message)
     return redirect(url_for('admin_chaussure.show_chaussure'))
