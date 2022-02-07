@@ -10,21 +10,20 @@
     {% endif %}
     <form method="post" action="{{ url_for('admin_chaussure.valid_edit_chaussure') }}">
         <fieldset>
-            <input type="hidden" name="id" size="18" value="{{ chaussure.id_chaussure }}">
+            <input type="hidden" name="id_chaussure" size="18" value="{{ chaussure.id_chaussure }}">
             <label for="nom_chaussure">Nom de la chaussure</label><br>
             <input type="text" name="nom_chaussure" size="18" value="{{ chaussure.nom_chaussure }}">
             <br>
 
             <div class="form-group">
                 <label for="id_type_chaussure"> Type chaussure </label>
-            </div>
+            <br>
             <select name="id_type_chaussure" required>
                 {% for type_chaussure in types_chaussures %}
                     <option value="{{ type_chaussure.id_type_chaussure }}">{{ type_chaussure.nom_type_chaussure }}</option>
                 {% endfor %}
             </select>
-
-            <br>
+            </div>
             <label for="prix_chaussuere">Prix</label><br>
             <input type="number" name="prix_chaussure" size="18" value="{{ chaussure.prix_chaussure }}">
             <br>

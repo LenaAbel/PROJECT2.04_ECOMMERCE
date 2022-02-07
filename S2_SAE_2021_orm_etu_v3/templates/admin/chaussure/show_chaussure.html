@@ -44,7 +44,7 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a class="btn btn-outline-success" href="/admin/chaussure/edit/{{ ligne.id_chaussure }}">Editer</a><a class="btn btn-danger"  href="/chaussure/delete?id={{ ligne.id_chaussure }}" onclick="return confirm('Are you sure?')">Supprimer</a>
+                        <a class="btn btn-success" href="/admin/chaussure/edit/{{ ligne.id_chaussure }}">Editer</a><a class="btn btn-danger"  href="/chaussure/delete?id={{ ligne.id_chaussure }}" onclick="return confirm('Are you sure?')">Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}

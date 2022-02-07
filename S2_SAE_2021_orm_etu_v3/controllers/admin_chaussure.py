@@ -74,9 +74,9 @@ def edit_chaussure(id):
 
 @admin_chaussure.route('/admin/chaussure/edit', methods=['POST'])
 def valid_edit_chaussure():
-    nom = request.form['nom_chaussure']
     id = request.form.get('id_chaussure', '')
-    id_type = request.form.get('type_chaussure_id', '')
+    nom = request.form['nom_chaussure']
+    id_type = request.form.get('id_type_chaussure', '')
     #type_chaussure_id = int(type_chaussure_id)
     prix = request.form.get('prix_chaussure', '')
     stock = request.form.get('stock_chaussure', '')

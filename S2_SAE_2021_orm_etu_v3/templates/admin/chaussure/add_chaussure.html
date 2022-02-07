@@ -19,14 +19,13 @@
                 </div>
                 <div class="form-group">
                     <label for="id_type_chaussure"> Types chaussure </label><br>
-                </div>
                 <select name="id_type_chaussure" required>
                     <option value="">Sélectionner un type de chaussure</option>
                     {% for type_chaussure in types_chaussures %}
                         <option value="{{ type_chaussure.id_type_chaussure }}"> {{ type_chaussure.nom_type_chaussure }} </option>
                     {% endfor %}
                 </select>
-                <br>
+                </div>
                 <div class="form-group">
                     <label for="prix_chaussure">Prix</label><br>
                     <input id="prix_chaussure" type="number" name="prix_chaussure" size="18" value=""
