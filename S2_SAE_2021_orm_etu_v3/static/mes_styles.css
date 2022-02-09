@@ -6,8 +6,12 @@ br, h2 {
     color: blue;
 }
 
-.logo {
-
-    display:block;
-
+#container {
+    width: 60%;
+    height: 60%;
+    padding: 5%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
