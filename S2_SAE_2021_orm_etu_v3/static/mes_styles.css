@@ -1,3 +1,13 @@
-h1 { color: green;}
+h1 {
+    color: green;
+}
 
-br , h2 { color: blue; }
+br, h2 {
+    color: blue;
+}
+
+.logo {
+
+    display:block;
+
+}
