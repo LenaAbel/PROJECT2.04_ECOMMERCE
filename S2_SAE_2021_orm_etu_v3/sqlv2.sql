@@ -254,3 +254,5 @@ SELECT * FROM LIGNE_COMMANDE;
 SELECT * FROM MESURE;
 SELECT * FROM EST_DE_COULEUR;
 SELECT * FROM PANIER;
+
+SELECT id_type_chaussure, COUNT(id_type_chaussure) AS nbmChaussure FROM CHAUSSURE GROUP BY id_type_chaussure ORDER BY id_type_chaussure ASC;
