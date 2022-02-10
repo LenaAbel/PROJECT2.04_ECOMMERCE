@@ -56,8 +56,8 @@ def delete_chaussure():
     tuple_delete = (id)
     sql = "DELETE FROM CHAUSSURE WHERE id_chaussure = %s;"
     mycursor = get_db().cursor()
-    mycursor.execute("SET FOREIGN_KEY_CHECKS=0")
-    res = mycursor.execute(sql, tuple_delete)
+    #mycursor.execute("SET FOREIGN_KEY_CHECKS=0")
+    mycursor.execute(sql, tuple_delete)
     res = get_db().commit()
     print("Supression de la chaussure #", id)
     flash(u'Supression de la chaussure #' + id)
