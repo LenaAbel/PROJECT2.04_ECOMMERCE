@@ -8,11 +8,30 @@ from connexion_db import get_db
 admin_type_chaussure = Blueprint('admin_type_chaussure', __name__,
                         template_folder='templates')
 
+# Merge two lists of dictionaries
+def update_dic_lists(dicList1, dicList2, element) :
+    for dic1 in dicList1:
+        for dic2 in dicList2:
+            if dic1['id_type_chaussure'] == dic2['id_type_chaussure']:
+                dic1[element] = dic2[element]
+    return dicList1
+
 @admin_type_chaussure.route('/admin/type-chaussure/show')
 def show_type_chaussure():
     mycursor = get_db().cursor()
-    types_chaussures = []
-    return render_template('admin/type_chaussure/show_type_chaussure.html', types_chaussures=types_chaussures)
+    sql = "SELECT * FROM TYPE_CHAUSSURE"
+    mycursor.execute(sql)
+    typesChaussuresList = mycursor.fetchall()
+    print("In show_type_chaussure(): ")
+    print(typesChaussuresList)
+    # Build a command to retrieve the number of chaussure per type_chaussure
+    sql = "SELECT id_type_chaussure, COUNT(id_type_chaussure) AS nmbChaussures FROM CHAUSSURE GROUP BY id_type_chaussure ORDER BY id_type_chaussure ASC"
+    mycursor.execute(sql)
+    nmbChaussuresList = mycursor.fetchall()
+    print(nmbChaussuresList)
+    updtatedTypeList = update_dic_lists(typesChaussuresList, nmbChaussuresList, 'nmbChaussures')
+    print(updtatedTypeList)
+    return render_template('admin/type_chaussure/show_type_chaussure.html', types_chaussures=updtatedTypeList)
 
 @admin_type_chaussure.route('/admin/type-chaussure/add', methods=['GET'])
 def add_type_chaussure():

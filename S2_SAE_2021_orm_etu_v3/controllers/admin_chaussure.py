@@ -49,17 +49,18 @@ def valid_add_chaussure():
     flash(message)
     return redirect(url_for('admin_chaussure.show_chaussure'))
 
-@admin_chaussure.route('/admin/chaussure/delete', methods=['POST'])
+@admin_chaussure.route('/admin/chaussure/delete', methods=['GET'])
 def delete_chaussure():
-    id_chaussure = request.args.get('id_chaussure', '')
-    tuple_delete = (id_chaussure)
+    #id = request.args.get('id_chaussure', '')
+    id = request.form.get('id_chaussure', '')
+    tuple_delete = (id)
     sql = "DELETE FROM CHAUSSURE WHERE id_chaussure = %s;"
     mycursor = get_db().cursor()
     mycursor.execute("SET FOREIGN_KEY_CHECKS=0")
     res = mycursor.execute(sql, tuple_delete)
     res = get_db().commit()
-    print("Supression de la chaussure #", id_chaussure)
-    flash(u'Supression de la chaussure #' + id_chaussure)
+    print("Supression de la chaussure #", id)
+    flash(u'Supression de la chaussure #' + id)
     return redirect(url_for('admin_chaussure.show_chaussure'))
 
 @admin_chaussure.route('/admin/chaussure/edit/<int:id>', methods=['GET'])
