@@ -12,11 +12,13 @@
         <thead class="thead-dark">
         <tr>
             <th>ID</th>
-            <th>Nom </th>
+            <th>Nom</th>
+            <th>Stock</th>
+            <th>Prix</th>
             <th>Marque</th>
             <th>Fournisseur</th>
             <th>Type chaussure</th>
-            <th>Stock</th>
+            <th>Matière</th>
             <th>Image</th>
             <th>Opération</th>
         </tr>
@@ -27,10 +29,34 @@
                 <tr>
                     <td>{{ ligne.id_chaussure }}</td>
                     <td>{{ ligne.nom_chaussure }}</td>
-                    <td>{{ ligne.marque_chaussure }}</td>
-                    <td>{{ ligne.fournisseur_chaussure }}</td>
-                    <td>{{ ligne.id_type_chaussure }}</td>
                     <td>{{ ligne.stock_chaussure }}</td>
+                    <td>{{ ligne.prix_chaussure }}</td>
+
+                    <td>{% for ligne2 in marques %}
+                        {% if ligne.id_marque is defined and ligne2.id_marque ==  ligne.id_marque %}
+                            {{ ligne2.libelle_marque }}{% endif %}
+                    {% endfor %} ( {{ ligne.id_marque }} )
+                    </td>
+
+                    <td>{% for ligne2 in fournisseurs %}
+                        {% if ligne.id_fournisseur is defined and ligne2.id_fournisseur ==  ligne.id_fournisseur %}
+                            {{ ligne2.libelle_fournisseur }}{% endif %}
+                    {% endfor %} ( {{ ligne.id_fournisseur }} )
+                    </td>
+
+                    <td>{% for ligne2 in types_chaussures %}
+                        {% if ligne.id_type_chaussure is defined and ligne2.id_type_chaussure ==  ligne.id_type_chaussure %}
+                            {{ ligne2.nom_type_chaussure }}{% endif %}
+                    {% endfor %} ( {{ ligne.id_type_chaussure }} )
+                    </td>
+
+                    <td>{% for ligne2 in matieres %}
+                        {% if ligne.id_matiere is defined and ligne2.id_matiere ==  ligne.id_matiere %}
+                            {{ ligne2.libelle_matiere }}{% endif %}
+                    {% endfor %} ( {{ ligne.id_matiere }} )
+                    </td>
+
+
 
                     <td>
                         {# {{ ligne.image_chaussure }}#}
@@ -40,11 +66,13 @@
                                  alt="image_chaussure  de {{ ligne.nom_chaussure }}">
                         {% else %}
                             <img style="width:40px;height:40px"
-                                 src="{{ url_for('static', filename='images/no_photo.jpeg') }}" alt="no image">
+                                 src="{{ url_for('static', filename='images/no_photo.png') }}" alt="no image">
                         {% endif %}
                     </td>
                     <td>
-                        <a class="btn btn-success" href="/admin/chaussure/edit/{{ ligne.id_chaussure }}">Editer</a><a class="btn btn-danger"  href="/admin/chaussure/delete?id={{ ligne.id_chaussure }}" onclick="return confirm('Are you sure?')">Supprimer</a>
+                        <a class="btn btn-success" href="/admin/chaussure/edit/{{ ligne.id_chaussure }}">Editer</a><a
+                            class="btn btn-danger" href="/admin/chaussure/delete?id={{ ligne.id_chaussure }}"
+                            onclick="return confirm('Are you sure?')">Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}
