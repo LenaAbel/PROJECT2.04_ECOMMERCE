@@ -15,3 +15,11 @@ br, h2 {
     justify-content: center;
     align-items: center;
 }
+
+table, tr {
+    font-family: Arial;
+    table-layout: fixed;
+    text-align: center;
+    width: 800px;
+    height: 60px
+}
