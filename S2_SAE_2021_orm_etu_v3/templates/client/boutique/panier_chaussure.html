@@ -30,17 +30,17 @@
                                {% if itemPanier.stock > 0 %}
                                 <form action="/client/panier/add" style="display: inline-block;"  method="post">
                                         <input type="hidden" name="quantite" value="1">
-                                        <input type="hidden" name="idchaussure" value="{{ itemPanier.chaussure_id }}">
+                                        <input type="hidden" name="id_chaussure" value="{{ itemPanier.id_chaussure }}">
                                     <button class="btn btn-primary" > + </button>
                                 </form>
                                {% endif %}
                                 <form action="/client/panier/delete"  style="display: inline-block;"  method="post">
-                                    <input type="hidden" name="idchaussure" value="{{ itemPanier.chaussure_id }}">
+                                    <input type="hidden" name="id_chaussure" value="{{ itemPanier.id_chaussure }}">
                                     <button class="btn btn-primary" > - </button>
                                 </form>
 
                                 <form action="/client/panier/delete/line" style="display: inline-block;"  method="post">
-                                    <input type="hidden" name="idchaussure" value="{{ itemPanier.chaussure_id }}">
+                                    <input type="hidden" name="idchaussure" value="{{ itemPanier.id_chaussure }}">
                                     <button class="btn btn-primary" >Supprimer</button>
                                 </form>
                             </td>

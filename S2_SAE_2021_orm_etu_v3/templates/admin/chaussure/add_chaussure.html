@@ -39,17 +39,35 @@
                     <br>
                 </div>
                 <div class="form-group">
-                    <label for="marque_chaussure">Marque de chaussure</label><br>
-                    <input id="marque_chaussure" type="text" name="marque_chaussure" size="18" value=""
-                           placeholder="Saisir la marque ">
-                    <br>
+                    <label for="marque_chaussure"> Marque chaussure </label><br>
+                <select name="marque_chaussure" required>
+                    <option value="">Sélectionner une marque</option>
+                    {% for marque in marques %}
+                        <option value="{{ marque.id_marque }}"> {{ marque.libelle_marque }} </option>
+                    {% endfor %}
+                </select>
                 </div>
+
                 <div class="form-group">
-                    <label for="fournisseur_chaussure">Fournisseur</label><br>
-                    <input id="fournisseur_chaussure" type="text" name="fournisseur_chaussure" size="18" value=""
-                           placeholder="Saisir le fournisseur ">
-                    <br>
+                    <label for="fournisseur_chaussure"> Fournisseur </label><br>
+                <select name="fournisseur_chaussure" required>
+                    <option value="">Sélectionner un fournisseur</option>
+                    {% for fournisseur in fournisseurs %}
+                        <option value="{{ fournisseur.id_fournisseur }}"> {{ fournisseur.libelle_fournisseur }} </option>
+                    {% endfor %}
+                </select>
                 </div>
+
+                <div class="form-group">
+                    <label for="matiere_chaussure"> Matiere </label><br>
+                <select name="matiere_chaussure" required>
+                    <option value="">Sélectionner une matière</option>
+                    {% for matiere in matieres%}
+                        <option value="{{ matiere.id_matiere }}"> {{ matiere.libelle_matiere }} </option>
+                    {% endfor %}
+                </select>
+                </div>
+
                 <div class="form-group">
                     <label for="image_chaussure"> Image Produit</label><br>
                     <input type="file" name="image_chaussure">

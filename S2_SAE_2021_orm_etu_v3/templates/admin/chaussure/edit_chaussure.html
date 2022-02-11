@@ -17,12 +17,12 @@
 
             <div class="form-group">
                 <label for="id_type_chaussure"> Type chaussure </label>
-            <br>
-            <select name="id_type_chaussure" required>
-                {% for type_chaussure in types_chaussures %}
-                    <option value="{{ type_chaussure.id_type_chaussure }}">{{ type_chaussure.nom_type_chaussure }}</option>
-                {% endfor %}
-            </select>
+                <br>
+                <select name="id_type_chaussure" required>
+                    {% for type_chaussure in types_chaussures %}
+                        <option value="{{ type_chaussure.id_type_chaussure }}">{{ type_chaussure.nom_type_chaussure }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <label for="prix_chaussuere">Prix</label><br>
             <input type="number" name="prix_chaussure" size="18" value="{{ chaussure.prix_chaussure }}">
@@ -30,12 +30,35 @@
             <label for="stock_chaussure"> Stock</label><br>
             <input type="number" name="stock_chaussure" size="18" value="{{ chaussure.stock_chaussure }}">
             <br>
-            <label for="marque_chaussure"> Marque de chaussure</label><br>
-            <input type="text" name="marque_chaussure" size="18" value="{{ chaussure.marque_chaussure }}">
-            <br>
-            <label for="fournisseur_chaussure"> Fournisseur</label><br>
-            <input type="text" name="fournisseur_chaussure" size="18" value="{{ chaussure.fournisseur_chaussure }}">
-            <br>
+            <div class="form-group">
+                <label for="id_marque"> Marque </label>
+                <br>
+                <select name="id_marque" required>
+                    {% for marque in marques %}
+                        <option value="{{ marque.id_marque }}">{{ marque.libelle_marque }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="id_fournisseur"> Fournisseur </label>
+                <br>
+                <select name="id_fournisseur" required>
+                    {% for fournisseur in fournisseurs %}
+                        <option value="{{ fournisseur.id_fournisseur }}">{{ fournisseur.libelle_fournisseur }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="id_matiere"> Matière </label>
+                <br>
+                <select name="id_matiere" required>
+                    {% for matiere in matieres %}
+                        <option value="{{ matiere.id_matiere }}">{{ matiere.libelle_matiere }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
             <div class="form-group">
                 <label for="image_chaussure"> Image </label><br>
                 <input type="file" name="image_chaussure" size="18" value="{{ chaussure.image_chaussure }}">
