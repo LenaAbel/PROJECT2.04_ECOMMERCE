@@ -1,27 +1,29 @@
 {% extends 'admin/layout_admin.html' %}
 
 {% block title %}
-    <title>modifier un type d'chaussure</title>
+    <title>Modifier un type de chaussure</title>
 {% endblock %}
 
 {% block body %}
-  {% if error %}
-    <p class=error><strong>Error:</strong> {{ error }}
-  {% endif %}
-  <form method="post" action="/admin/type-chaussure/edit">
-    <fieldset>
-        <legend> Modifier un type chaussure</legend>
-        <div class="mb-3">
-        <input type="hidden" name="id" size="18" value="{{ type_chaussure.id }}" id="id">
-        <label for="libelle">libellé</label><br>
+    {% if error %}
+        <p class=error><strong>Error:</strong> {{ error }}
+    {% endif %}
+    <form method="post" action="/admin/type-chaussure/edit">
+        <fieldset>
+            <legend> Modifier un type chaussure</legend>
+            <div class="mb-3">
+                <input type="hidden" name="id_type_chaussure" size="18" value="{{ type_chaussure.id_type_chaussure }}"
+                       id="id_type_chaussure">
+                <label for="nom_type_chaussure">Nom du type</label><br>
+                <input type="text" name="nom_type_chaussure" size="18" value="{{ type_chaussure.nom_type_chaussure }}">
+                <br>
+            </div>
 
-        <input class="form-select" type="text" name="libelle" size="18" value="{{ type_chaussure.libelle }}" id="libelle"><br>
-        </div>
-        <div class="col-12">
-        <button class="btn btn-primary" type="submit">Valider</button>
-        </div>
-{#        <input type="submit" value="Modifier" name="Modifier" >#}
+            <div class="col-12">
+                <button class="btn btn-primary" type="submit">Valider</button>
+            </div>
+            {#        <input type="submit" value="Modifier" name="Modifier" >#}
 
-    </fieldset>
-  </form>
+        </fieldset>
+    </form>
 {% endblock %}

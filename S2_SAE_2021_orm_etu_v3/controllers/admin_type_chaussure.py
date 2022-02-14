@@ -45,9 +45,14 @@ def add_type_chaussure():
 
 @admin_type_chaussure.route('/admin/type-chaussure/add', methods=['POST'])
 def valid_add_type_chaussure():
-    libelle = request.form.get('libelle', '')
-    tuple_insert = (libelle,)
-    message = u'type ajouté , libellé :' + libelle
+    mycursor = get_db().cursor()
+    nom = request.form.get('nom_type_chaussure', '')
+    tuple_insert = (nom)
+    sql = "INSERT INTO TYPE_CHAUSSURE(nom_type_chaussure) VALUES (%s);"
+    mycursor.execute(sql, tuple_insert)
+    res = get_db().commit()
+    print(u'Ajout du type, Nom: ', nom)
+    message = u'Ajout du type , Nom:' + nom
     flash(message)
     return redirect('/admin/type-chaussure/show')  # url_for('show_type_chaussure')
 
@@ -80,16 +85,26 @@ def delete_type_chaussure(id_type_chaussure):
         return redirect('/admin/type-chaussure/show')  # url_for('show_type_chaussure')
 
 
-@admin_type_chaussure.route('/admin/type-chaussure/edit/<int:id>', methods=['GET'])
+@admin_type_chaussure.route('/admin/type-chaussure/edit/<int:id_type_chaussure>', methods=['GET'])
 def edit_type_chaussure(id_type_chaussure):
     mycursor = get_db().cursor()
-    type_chaussure = []
+    sql = "SELECT * FROM TYPE_CHAUSSURE WHERE id_type_chaussure=%s;"
+    mycursor.execute(sql, id_type_chaussure)
+    type_chaussure = mycursor.fetchone()
+    res = get_db().commit()
     return render_template('admin/type_chaussure/edit_type_chaussure.html', type_chaussure=type_chaussure)
 
 
 @admin_type_chaussure.route('/admin/type-chaussure/edit', methods=['POST'])
 def valid_edit_type_chaussure():
-    libelle = request.form['libelle']
-    id_type_chaussure = request.form.get('id', '')
-    flash(u'type chaussure modifié, id: ' + id_type_chaussure + " libelle : " + libelle)
+    mycursor = get_db().cursor()
+    id_type_chaussure = request.form.get('id_type_chaussure', '')
+    nom = request.form.get('nom_type_chaussure', '')
+    tuple_update = (nom, id_type_chaussure)
+    sql = "UPDATE TYPE_CHAUSSURE SET nom_type_chaussure=%s WHERE id_type_chaussure=%s;"
+    mycursor.execute(sql, tuple_update)
+    res = get_db().commit()
+    print(u'Modification d\'un type = ', id_type_chaussure, ' Nouveau nom: ', nom)
+    message = u'Modification d\'un type= ' + str(id_type_chaussure) + ' Nouveau nom: ' + nom
+    flash(message)
     return redirect('/admin/type-chaussure/show')  # url_for('show_type_chaussure')

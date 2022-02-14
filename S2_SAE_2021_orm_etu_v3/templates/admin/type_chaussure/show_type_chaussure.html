@@ -15,7 +15,7 @@
             <th>Nom</th>
             <th>Nombre de chaussure</th>
             <th>Opération</th>
-ure        </tr>
+        </tr>
         </thead>
         <tbody>
         {% if types_chaussures | length >= 1 %}
@@ -26,7 +26,7 @@ ure        </tr>
                     <td>{{ ligne.nmbChaussures }}</td>
                     <td>
                         <a class="btn btn-success" href="/admin/type-chaussure/edit/{{ ligne.id_type_chaussure }}">Editer</a>&nbsp;
-                        <a class="btn btn-danger"  href="/admin/type-chaussure/delete/{{ ligne.id_type_chaussure }}">Supprimer</a>
+                        <a class="btn btn-danger" href="/admin/type-chaussure/delete/{{ ligne.id_type_chaussure }}">Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}
