@@ -27,9 +27,11 @@
             <label for="prix_chaussuere">Prix</label><br>
             <input type="number" name="prix_chaussure" size="18" value="{{ chaussure.prix_chaussure }}">
             <br>
+
             <label for="stock_chaussure"> Stock</label><br>
             <input type="number" name="stock_chaussure" size="18" value="{{ chaussure.stock_chaussure }}">
             <br>
+
             <div class="form-group">
                 <label for="id_marque"> Marque </label>
                 <br>
@@ -39,6 +41,7 @@
                     {% endfor %}
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="id_fournisseur"> Fournisseur </label>
                 <br>
