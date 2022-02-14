@@ -39,7 +39,7 @@
                         </thead>
                         <tbody>
                         {% for commande in commandes %}
-                            <tr id="" {#% if commande.etat.nom == "Produit indisponible" %#} style="background: #FFD600; font-weight: bold;" {#% endif %#}>
+                            <tr id="" {#% if commandes.etat.nom == "Produit indisponible" %#} style="background: #FFD600; font-weight: bold;" {#% endif %#}>
                                 <td>{{ commande.date_achat.strftime('%d-%m-%Y') }}</td>
                                 <td> {{ commande.nbr_chaussures }} </td>
                                 <td>
