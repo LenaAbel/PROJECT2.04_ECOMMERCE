@@ -1,24 +1,72 @@
 {% extends 'admin/layout_admin.html' %}
 
 {% block title %}
-    <title>afficher les types d'chaussure</title>
+    <title>Afficher les types de chaussure</title>
+{% endblock %}
+
+{% block title %}
+    <title>Supprimer une type chaussure</title>
 {% endblock %}
 
 {% block body %}
-<h3>Suppression d'un type d'chaussures impossible</h3>
+    <h2>Supprimer une type chaussure</h2>
 <br>
-<h3>Il y a <span style="color:red;"> {{ nbr_chaussures.nbr_chaussures }} </span> chaussure(s) à supprimer</h3>
-<br>
-<ul>
-{% if chaussures | length >= 1 %}
+{#    {% set count = 1 %}
+    {% for ligne in chaussuresToDelete %}
+        {{ count }}
+        {% set count = count + 1 %}
+    {% endfor %}#}
+    <p><b><em>Attention!</em></b> Si vous supprimer cette type chaussure, ces type de chaussure seront également supprimés.</p>
 
-        {% for ligne in chaussures %}
-        <li>
-                 nom : {{ ligne.nom }} -  stock : {{ ligne.stock }} - <a class="btn btn-outline-danger" href="/admin/type-chaussure/delete?id={{ ligne.type_chaussure_id }}&amp;id_chaussure={{ligne.id}}" >supprimer</a>
-        </li><br>
-        {% endfor %}
 
-{% endif %}
-</ul>
-<a class="btn btn-outline-warning" href="/admin/type-chaussure/show" >annuler</a>
+    {% if error %}
+        <p class=error><strong>Error:</strong> {{ error }}
+    {% endif %}
+
+    <table class="table">
+    <thead></thead>
+        <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nom</th>
+            <th>Stock</th>
+            <th>Type chaussure</th>
+            <th>Image</th>
+            <th>Opération</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if chaussureToDelete | length >= 1 %}
+            {% for ligne in chaussureToDelete %}
+                <tr>
+                    <td>{{ ligne.id_chaussure }}</td>
+                    <td>{{ ligne.nom_chaussure }}</td>
+                    <td>{{ ligne.stock_chaussure}}</td>
+                    <td>{{ ligne.id_type_chaussure }}</td>
+                    <td>
+{#                        {{ ligne.image }}#}
+                        {% if ligne.image_chaussure is not none %}
+                            <img style="width:40px;height:40px"
+                                 src="{{ url_for('static', filename = 'images/' + ligne['image_chaussure']) }}"
+                                 alt="image_chaussure  de {{ ligne.nom_chaussure }}">
+                        {% else %}
+                            <img style="width:40px;height:40px"
+                                 src="{{ url_for('static', filename='images/no_photo.png') }}" alt="no image">
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="/chaussure/delete?id={{ ligne.id_chaussure }}"
+                           onclick="return confirm('Are you sure?')">Supprimer</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td>
+                    Pas un article.
+                </td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
 {% endblock %}

@@ -13,22 +13,20 @@
         <tr>
             <th>ID</th>
             <th>Nom</th>
-            <th>Matière</th>
             <th>Nombre de chaussure</th>
             <th>Opération</th>
 ure        </tr>
         </thead>
         <tbody>
-        {% if chaussures | length >= 1 %}
-            {% for ligne in chaussures %}
+        {% if types_chaussures | length >= 1 %}
+            {% for ligne in types_chaussures %}
                 <tr>
                     <td>{{ ligne.id_type_chaussure }}</td>
                     <td>{{ ligne.nom_type_chaussure }}</td>
-                    <td>{{ ligne.matiere_type_chaussure }}</td>
                     <td>{{ ligne.nmbChaussures }}</td>
                     <td>
-                        <a href="/type-chaussure/edit/{{ ligne.id_type_chaussure }}">Editer</a>&nbsp;
-                        <a href="/type-chaussure/delete/{{ ligne.id_type_chaussure }}">Supprimer</a>
+                        <a class="btn btn-success" href="/admin/type-chaussure/edit/{{ ligne.id_type_chaussure }}">Editer</a>&nbsp;
+                        <a class="btn btn-danger"  href="/admin/type-chaussure/delete/{{ ligne.id_type_chaussure }}">Supprimer</a>
                     </td>
                 </tr>
             {% endfor %}

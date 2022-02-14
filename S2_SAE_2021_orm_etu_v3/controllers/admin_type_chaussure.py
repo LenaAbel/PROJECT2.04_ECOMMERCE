@@ -6,15 +6,17 @@ from flask import request, render_template, redirect, flash
 from connexion_db import get_db
 
 admin_type_chaussure = Blueprint('admin_type_chaussure', __name__,
-                        template_folder='templates')
+                                 template_folder='templates')
+
 
 # Merge two lists of dictionaries
-def update_dic_lists(dicList1, dicList2, element) :
+def update_dic_lists(dicList1, dicList2, element):
     for dic1 in dicList1:
         for dic2 in dicList2:
             if dic1['id_type_chaussure'] == dic2['id_type_chaussure']:
                 dic1[element] = dic2[element]
     return dicList1
+
 
 @admin_type_chaussure.route('/admin/type-chaussure/show')
 def show_type_chaussure():
@@ -28,45 +30,66 @@ def show_type_chaussure():
     sql = "SELECT id_type_chaussure, COUNT(id_type_chaussure) AS nmbChaussures FROM CHAUSSURE GROUP BY id_type_chaussure ORDER BY id_type_chaussure ASC"
     mycursor.execute(sql)
     nmbChaussuresList = mycursor.fetchall()
-    print(nmbChaussuresList)
+    # print("nmbChaussuresList: ")
+    # print(nmbChaussuresList)
     updtatedTypeList = update_dic_lists(typesChaussuresList, nmbChaussuresList, 'nmbChaussures')
-    print(updtatedTypeList)
+    # print("updtatedTypeList: ")
+    # print(updtatedTypeList)
     return render_template('admin/type_chaussure/show_type_chaussure.html', types_chaussures=updtatedTypeList)
+
 
 @admin_type_chaussure.route('/admin/type-chaussure/add', methods=['GET'])
 def add_type_chaussure():
     return render_template('admin/type_chaussure/add_type_chaussure.html')
 
+
 @admin_type_chaussure.route('/admin/type-chaussure/add', methods=['POST'])
 def valid_add_type_chaussure():
     libelle = request.form.get('libelle', '')
     tuple_insert = (libelle,)
-    message = u'type ajouté , libellé :'+libelle
+    message = u'type ajouté , libellé :' + libelle
     flash(message)
-    return redirect('/admin/type-chaussure/show') #url_for('show_type_chaussure')
+    return redirect('/admin/type-chaussure/show')  # url_for('show_type_chaussure')
 
-@admin_type_chaussure.route('/admin/type-chaussure/delete', methods=['GET'])
-def delete_type_chaussure():
+
+@admin_type_chaussure.route('/admin/type-chaussure/delete/<int:id_type_chaussure>', methods=['GET'])
+def delete_type_chaussure(id_type_chaussure):
+    mycursor = get_db().cursor()
     id_type_chaussure = request.args.get('id', '')
-    flash(u'suppression type chaussure , id : ' + id_type_chaussure)
-    return redirect('/admin/type-chaussure/show') #url_for('show_type_chaussure')
+    # flash(u'suppression type chaussure , id : ' + id_type_chaussure)
+
+    tuple_delete = (id_type_chaussure)
+    sql = "DELETE FROM CHAUSSURE WHERE id_type_chaussure=%s;"
+    mycursor.execute(sql, tuple_delete)
+    if mycursor.rowcount != 0:
+        print(u'Warning: ' + str(mycursor.rowcount) + " shoes might be deleted.")
+        mycursor.rollback()
+        res = get_db().commit()
+        sql = "SELECT * FROM CHAUSSURE WHERE id_type_chaussure=%s;"
+        mycursor.execute(sql, tuple_delete)
+        chaussureToDelete = mycursor.fetchall()
+        print('chaussureToDelete:')
+        print(chaussureToDelete)
+        return render_template('/admin/type_chaussure/delete_type_chaussure.html', chaussureToDelete=chaussureToDelete)
+    else:
+        sql = "DELETE FROM TYPE_CHAUSSURE WHERE id_type_chaussure=%s;"
+        mycursor.execute(sql, tuple_delete)
+        res = get_db().commit()
+        print("Suppression de la chaussure de type: ", id_type_chaussure)
+        flash(u'Suppression de la chaussure de type: ' + str(id_type_chaussure))
+        return redirect('/admin/type-chaussure/show')  # url_for('show_type_chaussure')
+
 
 @admin_type_chaussure.route('/admin/type-chaussure/edit/<int:id>', methods=['GET'])
-def edit_type_chaussure(id):
+def edit_type_chaussure(id_type_chaussure):
     mycursor = get_db().cursor()
     type_chaussure = []
     return render_template('admin/type_chaussure/edit_type_chaussure.html', type_chaussure=type_chaussure)
+
 
 @admin_type_chaussure.route('/admin/type-chaussure/edit', methods=['POST'])
 def valid_edit_type_chaussure():
     libelle = request.form['libelle']
     id_type_chaussure = request.form.get('id', '')
     flash(u'type chaussure modifié, id: ' + id_type_chaussure + " libelle : " + libelle)
-    return redirect('/admin/type-chaussure/show') #url_for('show_type_chaussure')
-
-
-
-
-
-
-
+    return redirect('/admin/type-chaussure/show')  # url_for('show_type_chaussure')
