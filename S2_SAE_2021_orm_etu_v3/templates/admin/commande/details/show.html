@@ -1,0 +1,31 @@
+{% extends "admin/layout_admin.html" %}
+{% block body %}
+    {% if chaussures_commandes %}
+        <h3>Récapitulatifs de la commande sélectionnée</h3>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>Nom</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Prix total</th>
+            </tr>
+            </thead>
+        <tbody>
+            {% for ligne in chaussures_commande %}
+                <tr>
+                    <td>{{ ligne.username }}</td>
+                    <td>{{ ligne.quantite }}</td>
+                    <td>{{ ligne.prix }}</td>
+                    <td>{{ ligne.prix_total }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+        </table>
+        {% if chaussures_commande[0].id_etat == 1 %}
+            <form action="/admin/commande/valider" method="post">
+                <input type="hidden" name="id_commande" value="{{ chaussures_commande[0].id_commande }}">
+                <button class="btn btn-primary">Valider (Expédier)</button>
+            </form>
+    {% endif %}
+{% endblock %}

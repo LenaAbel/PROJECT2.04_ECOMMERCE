@@ -333,4 +333,4 @@ SELECT * FROM MARQUE;
 SELECT * FROM FOURNISSEUR;
 SELECT * FROM POINTURE;
 
-SELECT id_type_chaussure, COUNT(id_type_chaussure) AS nmbChaussures FROM CHAUSSURE GROUP BY id_type_chaussure ORDER BY id_type_chaussure ASC
+SELECT id_type_chaussure, COUNT(id_type_chaussure) AS nmbChaussures FROM CHAUSSURE GROUP BY id_type_chaussure ORDER BY id_type_chaussure ASC;

@@ -1,0 +1,43 @@
+{% extends "admin/layout_admin.html" %}
+{% block body %}
+    <div class="card-shadow">
+        <div class="card-header py-3">
+            <p class="text-primary m-0 font-weight-bold">Toutes les commandes</p>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive table mt-2" id="dtataTable" role="grid" aria-describedby="dataTable_info">
+                <table class="table my-0" id="dataTable">
+                    <thead>
+                    <tr>
+                        <th>Date de commande</th>
+                        <th>Nombre de chaussures</th>
+                        <th>Cout total</th>
+                        <th>Etat de la commande</th>
+                        <th>Options</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for commande in commandes %}
+                        <tr id="" {% if commande.id_etat == 1 %} style="background-color: lightgreen" {% endif %}></tr>
+                            <td>{{ commande.date_achat.strftime('%d-%m-%Y')}}</td>
+                            <td>{{ commande.nbr_chaussures }}</td>
+                            <td>{{ commande.prix_total }}</td>
+                            <td>{{ commande.libelle_etat }}</td>
+                            <td>
+                                <form action="/admin/commande/valider" style="display: inline-block;" method="post">
+                                    <input type="hidden" name="id_commande" value="{{ commande.id_commande }}">
+                                    <button class="btn btn-primary"> Valider (Expédier°</button>
+                                </form>
+                                <form action="/admin/commande/show" style="display: inline-block;" method="post">
+                                    <input type="hidden" name="id_commande" value+="{{ commande.id_commande }}">
+                                    <button class="btn btn-primary">Details</button>
+
+                                </form>
+                            </td>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
