@@ -22,5 +22,5 @@ def client_commande_show():
     mycursor = get_db().cursor()
     commandes = None
     chaussures_commande = None
-    return render_template('client/commandes/show.html', commandes=commandes, chaussures_commande=chaussures_commande)
+    return render_template('client/commandes/details.html', commandes=commandes, chaussures_commande=chaussures_commande)
 

@@ -1,42 +1,84 @@
 {% extends "admin/layout_admin.html" %}
+
 {% block body %}
-    <div class="card-shadow">
-        <div class="card-header py-3">
-            <p class="text-primary m-0 font-weight-bold">Toutes les commandes</p>
-        </div>
-        <div class="card-body">
-            <div class="table-responsive table mt-2" id="dtataTable" role="grid" aria-describedby="dataTable_info">
-                <table class="table my-0" id="dataTable">
-                    <thead>
+    <div class="container-fluid">
+        {% if chaussures_commandes %}
+            <h3>Récapitulatifs de la commande sélectionnée</h3>
+            <table class="table">
+                <thead class="thead-dark">
+                <tr>
+                    <th>Nom</th>
+                    <th>Quantité</th>
+                    <th>Prix</th>
+                    <th>Prix total</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for ligne in chaussures_commande %}
                     <tr>
-                        <th>Date de commande</th>
-                        <th>Nombre de chaussures</th>
-                        <th>Cout total</th>
-                        <th>Etat de la commande</th>
-                        <th>Options</th>
+                        <td>{{ ligne.username }}</td>
+                        <td>{{ ligne.quantite }}</td>
+                        <td>{{ ligne.prix }}</td>
+                        <td>{{ ligne.prix_total }}</td>
                     </tr>
-                    </thead>
-                    <tbody>
-                    {% for commande in commandes %}
-                        <tr id="" {% if commande.id_etat == 1 %} style="background-color: lightgreen" {% endif %}></tr>
-                            <td>{{ commande.date_achat.strftime('%d-%m-%Y')}}</td>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if chaussures_commande[0].id_etat == 2 %}
+                <form action="/admin/commandes/valider" method="post">
+                    <input type="hidden" name="id_commande" value="{{ chaussures_commande[0].id_commande }}">
+                    <button class="btn btn-primary">Valider (Expédier)</button>
+                </form>
+            {% endif %}
+            <hr>
+        {% endif %}
+
+        <div class="card-shadow">
+            <div class="card-header py-3">
+                <p class="text-primary m-0 font-weight-bold">Toutes les commandes</p>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive table mt-2" id="dtataTable" role="grid" aria-describedby="dataTable_info">
+                    <table class="table my-0" id="dataTable">
+                        <thead>
+                        <tr>
+                            <th>ID Commande</th>
+                            <th>Date de commande</th>
+                            <th>Nombre de chaussures</th>
+                            <th>Cout total</th>
+                            <th>Etat de la commande</th>
+                            <th>Options</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for commande in commandes %}
+                            <tr id="" {% if commande.id_etat == 2 %}
+                                style="background-color: lightgreen" {% endif %}></tr>
+                            <td>{{ commande.id_commande }}</td>
+                            <td>{{ commande.date_achat.strftime('%d-%m-%Y') }}</td>
                             <td>{{ commande.nbr_chaussures }}</td>
                             <td>{{ commande.prix_total }}</td>
                             <td>{{ commande.libelle_etat }}</td>
                             <td>
-                                <form action="/admin/commande/valider" style="display: inline-block;" method="post">
+                                {% if (commande.id_etat != 1) %}
+                                    <a style="display: inline-block;"
+                                       href="/admin/commandes/valider/{{ commande.id_commande }}">
+                                        <button class="btn btn-outline-success">Valider</button>
+                                    </a>
+                                {% endif %}
+                                {#                                <form action="/admin/commandes/valider" style="display: inline-block;" method="post">
                                     <input type="hidden" name="id_commande" value="{{ commande.id_commande }}">
                                     <button class="btn btn-primary"> Valider (Expédier)</button>
-                                </form>
-                                <form action="/admin/commande/show" style="display: inline-block;" method="post">
-                                    <input type="hidden" name="id_commande" value+="{{ commande.id_commande }}">
+                                </form>#}
+                                <form action="/admin/commandes/show" style="display: inline-block;"  method="post">
+                                    <input type="hidden" name="id_commande" value="{{ commande.id_commande }}">
                                     <button class="btn btn-primary">Details</button>
-
                                 </form>
                             </td>
-                    {% endfor %}
-                    </tbody>
-                </table>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>

@@ -23,7 +23,7 @@
         </tbody>
         </table>
         {% if chaussures_commande[0].id_etat == 1 %}
-            <form action="/admin/commande/valider" method="post">
+            <form action="/admin/commandes/valider" method="post">
                 <input type="hidden" name="id_commande" value="{{ chaussures_commande[0].id_commande }}">
                 <button class="btn btn-primary">Valider (Expédier)</button>
             </form>
