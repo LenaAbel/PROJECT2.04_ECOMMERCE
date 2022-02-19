@@ -55,4 +55,4 @@ def admin_commande_details(id_commande):
     sql = "SELECT libelle_etat FROM ETAT INNER JOIN COMMANDE on COMMANDE.id_etat=ETAT.id_etat WHERE COMMANDE.id_etat = %s"
     mycursor.execute(sql, id_commande)
     etat = mycursor.fetchone()
-    return render_template('admin/commandes/show_commandes.html', chaussures=chaussures, etat=etat)
+    return render_template('admin/commandes/details/show.html', chaussures=chaussures, etat=etat)

@@ -1,0 +1,46 @@
+{% extends "admin/layout_admin.html" %}
+{% block body %}
+    <div class="container-fluid">
+        <h3>Récapitulatifs de la commande sélectionnée</h3>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Quantité</th>
+                <th>Prix</th>
+                <th>Prix total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for chaussure in chaussures %}
+                <tr>
+                    <td>{{ chaussure.id_commande }}</td>
+                    <td>{{ chaussure.quantite }}</td>
+                    <td>{{ chaussure.prix_unit }}</td>
+                    <td>{{ chaussure.prix_total }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+            <div>Etat de la commande : {{ etat.libelle_etat }}</div>
+        </table>
+    </div>
+{% endblock %}
+
+{#
+{% block body %}
+    <table class="table table-hover table-responsive">
+        <th style="width: 300px">id_article</th>
+        <th style="width: 300px">prix_unitaire</th>
+        <th style="width: 300px">quantite</th>
+        <th style="width: 300px">prix total article</th>
+        {% for article in articles %}
+            <tr>
+                <td>{{ article.libelle }}</td>
+                <td>{{ article.prix_unit }}</td>
+                <td>{{ article.quantite|int }}</td>
+                <td>{{ article.prix_tot }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}#}
