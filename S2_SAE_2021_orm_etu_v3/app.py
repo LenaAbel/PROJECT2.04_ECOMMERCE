@@ -2,6 +2,7 @@
 # -*- coding:utf-8 -*-
 from flask import Flask, g
 
+from controllers.admin_users import *
 from controllers.auth_security import *
 
 from controllers.client_chaussure import *
@@ -16,6 +17,8 @@ from controllers.admin_type_chaussure import *
 from controllers.admin_dataviz_chaussure import *
 
 app = Flask(__name__)
+app.config['DEBUG'] = True
+app.config['EXPLAIN_TEMPLATE_LOADING'] = False
 app.secret_key = 'une cle(token) : grain de sel(any random string)'
 
 
@@ -63,6 +66,7 @@ app.register_blueprint(admin_commande)
 app.register_blueprint(admin_panier)
 app.register_blueprint(admin_type_chaussure)
 app.register_blueprint(admin_dataviz_chaussure)
+app.register_blueprint(admin_users)
 
 
 if __name__ == '__main__':

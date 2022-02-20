@@ -11,7 +11,7 @@ admin_commande = Blueprint('admin_commande', __name__,
 
 @admin_commande.route('/admin/commandes/index')
 def admin_index():
-    return render_template('/admin/layout_admin.html')
+    return render_template('admin/layout_admin.html')
 
 
 @admin_commande.route('/admin/commandes/show', methods=['GET', 'POST'])

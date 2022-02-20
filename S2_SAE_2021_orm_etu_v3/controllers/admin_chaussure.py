@@ -5,7 +5,6 @@ from flask import request, render_template, redirect, url_for, flash
 
 from connexion_db import get_db
 
-
 admin_chaussure = Blueprint('admin_chaussure', __name__,
                         template_folder='templates')
 
