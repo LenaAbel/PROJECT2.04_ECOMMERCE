@@ -167,7 +167,7 @@ INSERT INTO UTILISATEUR VALUES (NULL, 'admin', 'sha256$pBGlZy6UukyHBFDH$2f089c1d
 INSERT INTO ETAT VALUES (NULL,'Expediée'),
                         (NULL,'En Cours');
 
-INSERT INTO COMMANDE VALUES (NULL, '2019-12-20', 2, 2),
+INSERT INTO COMMANDE VALUES (NULL, '2019-12-20', 2, 1),
                             (NULL, '2021-02-03', 1, 2),
                             (NULL, '2021-09-29', 3, 2),
                             (NULL, '2021-12-07', 1, 2),
