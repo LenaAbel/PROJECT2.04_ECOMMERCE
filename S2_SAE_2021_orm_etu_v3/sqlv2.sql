@@ -165,19 +165,18 @@ INSERT INTO UTILISATEUR VALUES (NULL, 'admin', 'sha256$pBGlZy6UukyHBFDH$2f089c1d
                                (NULL, 'client2', 'sha256$ayiON3nJITfetaS8$0e039802d6fac2222e264f5a1e2b94b347501d040d71cfa4264cad6067cf5cf3', 'ROLE_client',1, 'client2', 'client2@client2.fr');
 
 INSERT INTO ETAT VALUES (NULL,'Expediée'),
-                        (NULL,'En Cours'),
-                        (NULL,'Reçu');
+                        (NULL,'En Cours');
 
 INSERT INTO COMMANDE VALUES (NULL, '2019-12-20', 2, 2),
-                            (NULL, '2021-02-03', 1, 3),
+                            (NULL, '2021-02-03', 1, 2),
                             (NULL, '2021-09-29', 3, 2),
-                            (NULL, '2021-12-07', 1, 3),
-                            (NULL, '2019-05-19', 1, 3),
+                            (NULL, '2021-12-07', 1, 2),
+                            (NULL, '2019-05-19', 1, 2),
                             (NULL, '2022-01-25', 2, 2),
                             (NULL, '2021-11-11', 2, 2),
-                            (NULL, '2020-12-25', 1, 3),
+                            (NULL, '2020-12-25', 1, 2),
                             (NULL, '2020-07-12', 3, 2),
-                            (NULL, '2020-01-05', 3, 3),
+                            (NULL, '2020-01-05', 3, 2),
                             (NULL, '2020-10-14', 3, 2),
                             (NULL, '2020-04-08', 3, 2);
 
