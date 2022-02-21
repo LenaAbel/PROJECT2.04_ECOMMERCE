@@ -14,7 +14,6 @@ from controllers.admin_chaussure import *
 from controllers.admin_commande import *
 from controllers.admin_panier import *
 from controllers.admin_type_chaussure import *
-from controllers.admin_dataviz_chaussure import *
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -65,7 +64,6 @@ app.register_blueprint(admin_chaussure)
 app.register_blueprint(admin_commande)
 app.register_blueprint(admin_panier)
 app.register_blueprint(admin_type_chaussure)
-app.register_blueprint(admin_dataviz_chaussure)
 app.register_blueprint(admin_users)
 
 

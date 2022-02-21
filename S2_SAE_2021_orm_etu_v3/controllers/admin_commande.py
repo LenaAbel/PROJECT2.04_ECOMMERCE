@@ -27,7 +27,7 @@ def admin_commande_show():
           "ORDER BY id_commande ASC;"
     mycursor.execute(sql)
     commandes = mycursor.fetchall()
-    return render_template('/admin/commandes/show_commandes.html', commandes=commandes)
+    return render_template('admin/commandes/show_commandes.html', commandes=commandes)
 
 
 @admin_commande.route('/admin/commandes/valider/<int:id_commande>', methods=['GET', 'POST'])
