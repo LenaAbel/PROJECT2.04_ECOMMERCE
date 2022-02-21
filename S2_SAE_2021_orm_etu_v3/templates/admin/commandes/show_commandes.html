@@ -29,7 +29,7 @@
                                 <td>{{ commande.id_commande }}</td>
                                 <td>{{ commande.date_achat.strftime('%d-%m-%Y') }}</td>
                                 <td>{{ commande.nbr_chaussures }}</td>
-                                <td>{{ commande.prix_total }}</td>
+                                <td>{{ commande.prix_total }}€</td>
                                 <td>{{ commande.libelle_etat }}</td>
                                 <td>
                                     {% if (commande.id_etat != 1) %}
