@@ -1,12 +1,12 @@
 {% extends "client/layout_client.html" %}
 {% block body %}
+
     <div class="container">
-        <div class="row align-self-right">
-            <div class="col-7">
+        <div class="row align-self-right m-3">
+            <div class="col-8 border">
                 {% if chaussuresPanier | length >= 1 %}
                     <h3>Liste des articles dans mon panier</h3>
                     <table class="table table-hover table-responsive">
-
                         <tr>
                             <th style="width: 300px">Nom</th>
                             <th style="width: 50px">Quantité</th>
@@ -44,13 +44,15 @@
                                         {% endif %}
                                         <form action="/client/panier/delete" style="display: inline-block;"
                                               method="post">
-                                            <input type="hidden" name="id_chaussure" value="{{ itemPanier.id_chaussure }}">
+                                            <input type="hidden" name="id_chaussure"
+                                                   value="{{ itemPanier.id_chaussure }}">
                                             <button class="btn btn-primary"> -</button>
                                         </form>
 
                                         <form action="/client/panier/delete/line" style="display: inline-block;"
                                               method="post">
-                                            <input type="hidden" name="id_chaussure" value="{{ itemPanier.id_chaussure }}">
+                                            <input type="hidden" name="id_chaussure"
+                                                   value="{{ itemPanier.id_chaussure }}">
                                             <button class="btn btn-primary">Supprimer</button>
                                         </form>
                                     </td>
@@ -76,7 +78,6 @@
                 Articles dont le nom est composé par :<br>
                 {% include('client/boutique/_filtre.html') %}
             </div>
-
         </div>
 
         <div class="bg-light p-3">
@@ -137,4 +138,3 @@
         </div>
     </div>
 {% endblock %}
-
