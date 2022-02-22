@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS CHAUSSURE(
    nom_chaussure VARCHAR(50),
    image_chaussure VARCHAR(50),
    prix_chaussure VARCHAR(50),
-   stock_chaussure VARCHAR(50),
+   stock_chaussure INT,
    id_marque INT NOT NULL,
    id_fournisseur INT NOT NULL,
    id_matiere INT NOT NULL,

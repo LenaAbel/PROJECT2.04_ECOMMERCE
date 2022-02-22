@@ -3,9 +3,10 @@
     <div class="container">
         <div class="row align-self-right">
             <div class="col-7">
-                {% if articlesPanier | length >= 1 %}
+                {% if chaussuresPanier | length >= 1 %}
                     <h3>Liste des articles dans mon panier</h3>
                     <table class="table table-hover table-responsive">
+
                         <tr>
                             <th style="width: 300px">Nom</th>
                             <th style="width: 50px">Quantité</th>
@@ -20,36 +21,36 @@
                             <td></td>
                             <td></td>
                         {% else %}
-                            {% for itemPanier in articlesPanier %}
+                            {% for itemPanier in chaussuresPanier %}
                                 <tr>
-                                    <td>{{ itemPanier.nom }}</td>
-                                    <td>{{ itemPanier.quantite }}</td>
+                                    <td>{{ itemPanier.nom_chaussure }}</td>
+                                    <td>{{ itemPanier.stock_chaussure }}</td>
                                     {% if itemPanier.prix is defined %}
-                                        <td>{{ itemPanier.prix }}</td>
-                                        <td>{{ "{:,.2f} €".format((itemPanier.prix * itemPanier.quantite)) }}</td>
+                                        <td>{{ itemPanier.prix_chaussure }}</td>
+                                        <td>{{ "{:,.2f} €".format((itemPanier.prix_chaussure * itemPanier.stock_chaussure)) }}</td>
                                     {% else %}
                                         <td>prix ND</td>
                                         <td>prix*qte ND</td>
                                     {% endif %}
                                     <td>
-                                        {% if itemPanier.stock is defined and itemPanier.stock > 0 %}
+                                        {% if itemPanier.stock_chaussure is defined and itemPanier.stock_chaussure > 0 %}
                                             <form action="/client/panier/add" style="display: inline-block;"
                                                   method="post">
                                                 <input type="hidden" name="quantite" value="1">
-                                                <input type="hidden" name="idArticle"
-                                                       value="{{ itemPanier.article_id }}">
+                                                <input type="hidden" name="id_chaussure"
+                                                       value="{{ itemPanier.id_chaussure }}">
                                                 <button class="btn btn-primary"> +</button>
                                             </form>
                                         {% endif %}
                                         <form action="/client/panier/delete" style="display: inline-block;"
                                               method="post">
-                                            <input type="hidden" name="idArticle" value="{{ itemPanier.article_id }}">
+                                            <input type="hidden" name="id_chaussure" value="{{ itemPanier.id_chaussure }}">
                                             <button class="btn btn-primary"> -</button>
                                         </form>
 
                                         <form action="/client/panier/delete/line" style="display: inline-block;"
                                               method="post">
-                                            <input type="hidden" name="idArticle" value="{{ itemPanier.article_id }}">
+                                            <input type="hidden" name="id_chaussure" value="{{ itemPanier.id_chaussure }}">
                                             <button class="btn btn-primary">Supprimer</button>
                                         </form>
                                     </td>
@@ -58,7 +59,7 @@
                         {% endif %}
                     </table>
                     <form action="/client/panier/vider" style="display: inline-block;" method="post">
-                        <button class="btn btn-primary"> Éffacer tout</button>
+                        <button class="btn btn-primary"> Effacer tout</button>
                     </form>
                     <form action="/client/commande/add" style="display: inline-block;" method="post">
                         <button class="btn btn-primary"> Passer ma commande</button>
@@ -83,48 +84,48 @@
         </div>
 
         <div class="row">
-            {% for article in articles %}
+            {% for chaussure in chaussures %}
                 <div class="card col-4 mt-4">
                     <div class="card-body border-dark rounded">
-                        <a href="/client/article/details/{{ article.id }}">
+                        <a href="/client/article/details/{{ chaussure.id_chaussure }}">
                             <h2 class="card-title">
-                                <span style="color: #0b2e13">{{ article.nom }}</span><br>
-                                {{ article.prix }}
+                                <span style="color: #0b2e13">{{ chaussure.nom_chaussure }}</span><br>
+                                {{ chaussure.prix_chaussure }}
                                 €
                             </h2>
                             <div class="card-body">
-                                {% if article.image is not none %}
+                                {% if chaussure.image_chaussure is not none %}
                                     <img class="card-img-top rounded mx-auto d-block" style="width:100px;height:100px"
-                                         src="{{ url_for('static', filename = 'images/' + article['image']) }}"
-                                         alt="image  de {{ article.nom }}">
+                                         src="{{ url_for('static', filename = 'images/' + chaussure['image_chaussure']) }}"
+                                         alt="image  de {{ chaussure.nom_chaussure }}">
                                 {% else %}
                                     <img class="card-img-top rounded mx-auto d-block" style="width:100px;height:100px"
                                          src="{{ url_for('static', filename='images/no_photo.jpeg') }}"
-                                         alt="image  de {{ article.nom }}">
+                                         alt="image  de {{ chaussure.nom_chaussure }}">
                                 {% endif %}
                                 <hr>
                             </div>
                         </a>
                         <div class="card-body">
                             <form action="/client/panier/add" method="post">
-                                <input type="hidden" name="idArticle" value="{{ article.id }}">
+                                <input type="hidden" name="id_chaussure" value="{{ chaussure.id_chaussure }}">
                                 <button class="btn btn-success float-right">
                                     <i class="fas fa-shopping-cart"></i>
                                     Ajouter
                                 </button>
 
                                 <div class="input-group input-group-sm" style="width: 4rem !important;">
-                                    <input type="number" id="input-{{ article.id }}" step="1" min="0"
-                                           max="{{ article.stock }}" class="form-control"
+                                    <input type="number" id="input-{{ chaussure.id_chaussure }}" step="1" min="0"
+                                           max="{{ chaussure.stock_chaussure }}" class="form-control"
                                            style="width: 4rem !important;" value="1" name="quantite">
                                 </div>
                             </form>
                         </div>
                     </div>
                     <div class="card-footer">
-                        {% if article.stock is defined %}
-                            {% if article.stock > 0 %}
-                                <small class="text-muted">Stock restant : {{ article.stock }}</small>
+                        {% if chaussure.stock_chaussure is defined %}
+                            {% if chaussure.stock_chaussure > 0 %}
+                                <small class="text-muted">Stock restant : {{ chaussure.stock_chaussure }}</small>
                             {% else %}
                                 <small class="text-muted">article momentanément indisponible</small>
                             {% endif %}
@@ -132,14 +133,14 @@
                         <br>
                         {% if article.nb_notes is defined %}
                             {% if article.nb_notes > 1 %}
-                                <a href="/client/article/details/{{ article.id }}">
+                                <a href="/client/article/details/{{ chaussure.id_chaussure }}">
                                     <span style="color: #3A7734"> note : {{ "{:,.1f}".format(article.moy_notes) }}</span>
                                 </a>
                             {% endif %}
                         {% endif %}
                         {% if article.nb_avis is defined %}
                             {% if article.nb_avis > 0 %}
-                                <a href="/client/article/details/{{ article.id }}">
+                                <a href="/client/article/details/{{ chaussure.id_chaussure }}">
                                     <span style="color: #3A7734">({{ article.nb_avis }} avis)</span>
                                 </a>
                             {% endif %}
