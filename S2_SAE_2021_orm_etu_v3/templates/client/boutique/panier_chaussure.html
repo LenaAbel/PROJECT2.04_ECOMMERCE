@@ -25,15 +25,15 @@
                                 <tr>
                                     <td>{{ itemPanier.nom_chaussure }}</td>
                                     <td>{{ itemPanier.stock_chaussure }}</td>
-                                    {% if itemPanier.prix is defined %}
-                                        <td>{{ itemPanier.prix_chaussure }}</td>
-                                        <td>{{ "{:,.2f} €".format((itemPanier.prix_chaussure * itemPanier.stock_chaussure)) }}</td>
+                                    {% if itemPanier.prix_unit is defined %}
+                                        <td>{{ itemPanier.prix_unit }}</td>
+                                        <td>{{ "{:,.2f} €".format((itemPanier.prix_unit * itemPanier.quantite)) }}</td>
                                     {% else %}
                                         <td>prix ND</td>
                                         <td>prix*qte ND</td>
                                     {% endif %}
                                     <td>
-                                        {% if itemPanier.stock_chaussure is defined and itemPanier.stock_chaussure > 0 %}
+                                        {% if itemPanier.stock_chaussure is defined and itemPanier.stock_chaussure > "0" %}
                                             <form action="/client/panier/add" style="display: inline-block;"
                                                   method="post">
                                                 <input type="hidden" name="quantite" value="1">
@@ -124,27 +124,13 @@
                     </div>
                     <div class="card-footer">
                         {% if chaussure.stock_chaussure is defined %}
-                            {% if chaussure.stock_chaussure > 0 %}
+                            {% if chaussure.stock_chaussure > "0" %}
                                 <small class="text-muted">Stock restant : {{ chaussure.stock_chaussure }}</small>
                             {% else %}
                                 <small class="text-muted">article momentanément indisponible</small>
                             {% endif %}
                         {% endif %}
                         <br>
-                        {% if article.nb_notes is defined %}
-                            {% if article.nb_notes > 1 %}
-                                <a href="/client/article/details/{{ chaussure.id_chaussure }}">
-                                    <span style="color: #3A7734"> note : {{ "{:,.1f}".format(article.moy_notes) }}</span>
-                                </a>
-                            {% endif %}
-                        {% endif %}
-                        {% if article.nb_avis is defined %}
-                            {% if article.nb_avis > 0 %}
-                                <a href="/client/article/details/{{ chaussure.id_chaussure }}">
-                                    <span style="color: #3A7734">({{ article.nb_avis }} avis)</span>
-                                </a>
-                            {% endif %}
-                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

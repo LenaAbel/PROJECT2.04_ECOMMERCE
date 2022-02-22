@@ -18,7 +18,7 @@ def client_chaussure_show():                                 # remplace client_i
     sql = "SELECT * FROM TYPE_CHAUSSURE"
     mycursor.execute(sql)
     types_chaussures = mycursor.fetchall()
-    mycursor.execute("SELECT * FROM PANIER INNER JOIN CHAUSSURE ON PANIER.id_chaussure=CHAUSSURE.id_chaussure WHERE PANIER.id_utilisateur=%s", session['user_id'])
+    mycursor.execute("SELECT *, CHAUSSURE.nom_chaussure, CHAUSSURE.stock_chaussure FROM PANIER INNER JOIN CHAUSSURE ON PANIER.id_chaussure=CHAUSSURE.id_chaussure WHERE PANIER.id_utilisateur=%s", session['user_id'])
     chaussures_panier = mycursor.fetchall()
     prix_total = None
     return render_template('client/boutique/panier_chaussure.html', chaussures=chaussures, chaussuresPanier=chaussures_panier, prix_total=prix_total, itemsFiltre=types_chaussures)
