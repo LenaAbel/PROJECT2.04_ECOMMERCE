@@ -165,3 +165,43 @@ def valid_edit_chaussure():
     message = u'Chaussure modifiée, Nom:' + nom + '- Type chaussure:' + id_type + ' - Prix:' + prix + ' - Stock:' + stock + ' - Marque:' + marque + ' - Fournisseur:' + fournisseur + ' - Image:' + image
     flash(message)
     return redirect(url_for('admin_chaussure.show_chaussure'))
+
+
+
+@admin_chaussure.route('/admin/chaussure/bilan')
+def dataviz_article():
+    mycursor = get_db().cursor()
+    sql="SELECT TYPE_CHAUSSURE.id_type_chaussure,TYPE_CHAUSSURE.nom_type_chaussure as libelle,ROUND(SUM(CHAUSSURE.prix_chaussure*CHAUSSURE.stock_chaussure),0)as prix_total " \
+        "FROM CHAUSSURE " \
+        "INNER JOIN TYPE_CHAUSSURE ON CHAUSSURE.id_type_chaussure=TYPE_CHAUSSURE.id_type_chaussure " \
+        "GROUP BY id_type_chaussure;"
+    mycursor.execute(sql)
+    chaussures = mycursor.fetchall()
+    lPercentage = []
+    lLibelle = []
+    lTotaux = []
+
+    maxi = 0.0
+    for type in chaussures:
+        maxi+=float(type["prix_total"])
+
+
+    for type in chaussures:
+        lTotaux.append(float(type["prix_total"]))
+        if maxi == 0.0:
+            lPercentage.append(0.0)
+        else:
+            lPercentage.append((float(type["prix_total"])/maxi) * 100)
+        lLibelle.append(type["libelle"])
+
+
+    mycursor.execute("SELECT TYPE_CHAUSSURE.nom_type_chaussure as libelle, TYPE_CHAUSSURE.id_type_chaussure as id, SUM(stock_chaussure) as stockTotal, "
+                     "ROUND(SUM(prix_chaussure*stock_chaussure),0) as coutTotal "
+                     "FROM TYPE_CHAUSSURE "
+                     "LEFT JOIN CHAUSSURE C on TYPE_CHAUSSURE.id_type_chaussure = C.id_type_chaussure  "
+                     "GROUP BY TYPE_CHAUSSURE.id_type_chaussure, TYPE_CHAUSSURE.nom_type_chaussure;")
+    tableau = mycursor.fetchall()
+
+    return render_template('admin/dataviz/etat_chaussure_vente.html',tableau=tableau, chaussures=chaussures,
+                                                                                percentages = lPercentage,
+                                                                                libelle = lLibelle,totaux=lTotaux)
