@@ -23,7 +23,7 @@
                             {% for itemPanier in chaussuresPanier %}
                                 <tr>
                                     <td>{{ itemPanier.nom_chaussure }}</td>
-                                    <td>{{ itemPanier.stock_chaussure }}</td>
+                                    <td>{{ itemPanier.quantite }}</td>
                                     {% if itemPanier.prix_unit is defined %}
                                         <td>{{ itemPanier.prix_unit }}</td>
                                         <td>{{ "{:,.2f} €".format((itemPanier.prix_unit * itemPanier.quantite)) }}</td>
