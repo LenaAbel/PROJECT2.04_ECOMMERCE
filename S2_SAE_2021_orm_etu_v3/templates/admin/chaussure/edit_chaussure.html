@@ -20,7 +20,10 @@
                 <br>
                 <select name="id_type_chaussure" required>
                     {% for type_chaussure in types_chaussures %}
-                        <option value="{{ type_chaussure.id_type_chaussure }}">{{ type_chaussure.nom_type_chaussure }}</option>
+                        <option value="{{ type_chaussure.id_type_chaussure }}"
+                            {% if chaussure.id_type_chaussure is defined and type_chaussure.id_type_chaussure ==  chaussure.id_type_chaussure %}selected{% endif %}>
+                        {{ type_chaussure.nom_type_chaussure }}
+                    </option>
                     {% endfor %}
                 </select>
             </div>
@@ -37,7 +40,10 @@
                 <br>
                 <select name="id_marque" required>
                     {% for marque in marques %}
-                        <option value="{{ marque.id_marque }}">{{ marque.libelle_marque }}</option>
+                        <option value="{{ marque.id_marque }}"
+                            {% if chaussure.id_marque is defined and marque.id_marque ==  chaussure.id_marque %}selected{% endif %}>
+                        {{ marque.libelle_marque }}
+                    </option>
                     {% endfor %}
                 </select>
             </div>
@@ -46,8 +52,11 @@
                 <label for="id_fournisseur"> Fournisseur </label>
                 <br>
                 <select name="id_fournisseur" required>
-                    {% for fournisseur in fournisseurs %}
-                        <option value="{{ fournisseur.id_fournisseur }}">{{ fournisseur.libelle_fournisseur }}</option>
+                {% for fournisseur in fournisseurs %}
+                        <option value="{{ fournisseur.id_fournisseur }}"
+                            {% if chaussure.id_fournisseur is defined and fournisseur.id_fournisseur ==  chaussure.id_fournisseur %}selected{% endif %}>
+                        {{ fournisseur.libelle_fournisseur }}
+                    </option>
                     {% endfor %}
                 </select>
             </div>
@@ -57,7 +66,10 @@
                 <br>
                 <select name="id_matiere" required>
                     {% for matiere in matieres %}
-                        <option value="{{ matiere.id_matiere }}">{{ matiere.libelle_matiere }}</option>
+                        <option value="{{ matiere.id_matiere }}"
+                            {% if chaussure.id_matiere is defined and matiere.id_matiere ==  chaussure.id_matiere %}selected{% endif %}>
+                        {{ matiere.libelle_matiere }}
+                    </option>
                     {% endfor %}
                 </select>
             </div>
