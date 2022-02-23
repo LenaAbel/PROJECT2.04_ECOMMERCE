@@ -24,7 +24,7 @@ def admin_commande_show():
           "INNER JOIN UTILISATEUR U on C.id_utilisateur = U.id_utilisateur " \
           "INNER JOIN ETAT E on C.id_etat = E.id_etat " \
           "GROUP BY U.id_utilisateur, C.id_commande " \
-          "ORDER BY id_commande ASC;"
+          "ORDER BY date_achat ASC;"
     mycursor.execute(sql)
     commandes = mycursor.fetchall()
     return render_template('admin/commandes/show_commandes.html', commandes=commandes)

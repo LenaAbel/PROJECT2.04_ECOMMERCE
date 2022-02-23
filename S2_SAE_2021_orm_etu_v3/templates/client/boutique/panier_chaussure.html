@@ -32,7 +32,8 @@
                                         <td>prix*qte ND</td>
                                     {% endif %}
                                     <td>
-                                        {% if itemPanier.stock_chaussure is defined and itemPanier.stock_chaussure > "0" %}
+                                    {% if  itemPanier.stock_chaussure is defined %}
+                                        {% if itemPanier.stock_chaussure|int > 0 %}
                                             <form action="/client/panier/add" style="display: inline-block;"
                                                   method="post">
                                                 <input type="hidden" name="quantite" value="1">
@@ -41,6 +42,7 @@
                                                 <button class="btn btn-primary"> +</button>
                                             </form>
                                         {% endif %}
+                                    {% endif %}
                                         <form action="/client/panier/delete" style="display: inline-block;"
                                               method="post">
                                             <input type="hidden" name="id_chaussure"
@@ -124,7 +126,7 @@
                     </div>
                     <div class="card-footer">
                         {% if chaussure.stock_chaussure is defined %}
-                            {% if chaussure.stock_chaussure > "0" %}
+                            {% if chaussure.stock_chaussure|int > 0 %}
                                 <small class="text-muted">Stock restant : {{ chaussure.stock_chaussure }}</small>
                             {% else %}
                                 <small class="text-muted">article momentanément indisponible</small>

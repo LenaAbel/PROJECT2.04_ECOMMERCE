@@ -32,7 +32,7 @@ def client_panier_add():
         mycursor.execute(sql, tuple)
         get_db().commit()
     else :
-        if quantitePanier["quantite"] >= int( stockChaussure["stock_chaussure"]) :
+        if quantitePanier["quantite"] >= int(stockChaussure["stock_chaussure"]) :
             return redirect('/client/chaussure/show')
         else :
             mycursor.execute("UPDATE PANIER SET quantite = quantite+%s WHERE id_chaussure=%s AND id_utilisateur=%s", (quantite, id_chaussure, id_utilisateur))
