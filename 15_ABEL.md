@@ -7,4 +7,4 @@ Groupe numéro : 15
 
 URL du projet github : https://github.com/SAEADPT/SAEDPT.git
 
-URL du site pythonanywhere : https://www.pythonanywhere.com/user/SAE204ADPT/
+URL du site pythonanywhere : SAE204ADPT.pythonanywhere.com
