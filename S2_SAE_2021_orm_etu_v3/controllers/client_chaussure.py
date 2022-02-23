@@ -12,8 +12,39 @@ client_chaussure = Blueprint('client_chaussure', __name__,
 @client_chaussure.route('/client/chaussure/show')      # remplace /client
 def client_chaussure_show():                                 # remplace client_index
     mycursor = get_db().cursor()
+    debut = True
+    params = []
     sql = "SELECT * FROM CHAUSSURE"
-    mycursor.execute(sql)
+    if "filter_word" in session.keys():
+        sql += " WHERE nom_chaussure LIKE %s"
+        params.append("%" + session['filter_word'] + "%")
+        debut = False
+    if "filter_types" in session.keys() and len(session['filter_types']) > 0:
+        if len(session['filter_types']) == 1:
+            tpl = "('" + str(session['filter_types'][0]) + "')"
+        else:
+            tpl = str(tuple(session['filter_types']))
+        if debut:
+            sql += " WHERE id_type_chaussure in " + tpl
+        else:
+            sql += " AND id_type_chaussure in " + tpl
+        debut = False
+    if "filter_prix_min" in session.keys() and session["filter_prix_min"] != "":
+        if debut:
+            sql += " WHERE prix_chaussure > %s"
+        else:
+            sql += " AND prix_chaussure > %s"
+        debut = False
+        params.append(session['filter_prix_min'])
+    if "filter_prix_max" in session.keys() and session["filter_prix_max"] != "":
+        if debut:
+            sql += " WHERE prix_chaussure < %s"
+        else:
+            sql += " AND prix_chaussure < %s"
+        params.append(session['filter_prix_max'])
+
+    sql += " GROUP BY id_chaussure"
+    mycursor.execute(sql, params)
     chaussures = mycursor.fetchall()
     sql = "SELECT * FROM TYPE_CHAUSSURE"
     mycursor.execute(sql)
@@ -38,6 +69,6 @@ def client_chaussure_details(id):
     commandes_articles = mycursor.fetchall()
 
     mycursor.execute("SELECT * FROM NOTE WHERE id_chaussure = %s AND id_utilisateur = %s", (id, session["user_id"]))
-    userHasMadeAComment = mycursor.fetchall() != ()
+    userComment = mycursor.fetchall() != ()
 
-    return render_template('client/boutique/article_details.html', article=article, commentaires=commentaires, commandes_articles=commandes_articles, userHasMadeAComment=userHasMadeAComment)
+    return render_template('client/boutique/article_details.html', article=article, commentaires=commentaires, commandes_articles=commandes_articles, userComment=userComment)
