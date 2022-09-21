@@ -1,9 +1,11 @@
-# SAE2.04
+# **PROJET ACADEMIQUE:** Site d’e-commerce « Chaud-Sûre » 4 mois – 4 étudiants
 Ce répertoire regroupe le travail de ABEL Léna, DUBOL Lucas, PICOT Nicolas et TOILLON Samuel pour la SAE204.
 
 ### **En quoi consiste cette SAÉ?**
 
-  En partant d’un cahier des charges, il faut réaliser et étudier une base de données. À partir d’un jeu d’essais, il doit être proposé une visualisation des informations permettant d’apporter une analyse à l’entreprise. Cette SAÉ permet une première approche complète des aspects de conception, implémentation, administration et exploitation d’une base de données.
+- Création d’un site web pour la vente de chaussures (Flask, HTML, JavaScript, CSS)
+- Création et gestion d’une base de données (MySQL)
+- Mise en ligne sur serveur virtualisé (Linux, Git, Apache, machine virtuelle)
 
 
 ### Quelles sont les productions de cette SAÉ?
@@ -14,4 +16,3 @@ Ce répertoire regroupe le travail de ABEL Léna, DUBOL Lucas, PICOT Nicolas et 
 - Script de création de base de données
 - Interfaces pour ajouter/modifier/supprimer des données. Interfaces pour visualiser des informations
 
-555zz
