@@ -1,5 +1,6 @@
 # **PROJET ACADEMIQUE:** Site d’e-commerce « Chaud-Sûre » 4 mois – 4 étudiants
 Ce répertoire regroupe le travail de ABEL Léna, DUBOL Lucas, PICOT Nicolas et TOILLON Samuel pour la SAE204.
+Lien du site web sur pythonanywhere: http://sae204adpt.pythonanywhere.com/
 
 ### **En quoi consiste cette SAÉ?**
 
